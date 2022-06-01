@@ -1,3 +1,3 @@
-# Div Games Studio 2 Ports
+# Div Games Studio  Ports
 
-All games from Div Games Studio 2 ported to C#
+All games from Div Games Studio ported to C#
