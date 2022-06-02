@@ -25,6 +25,8 @@ namespace steroid_port.Game.States
         {
             _uiSystem.Init();
             _backgroundSystem.Init();
+            
+            _uiSystem.SetState(this);
         }
 
         public override void DoState()

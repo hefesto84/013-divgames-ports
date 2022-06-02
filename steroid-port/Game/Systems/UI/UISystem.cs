@@ -1,5 +1,7 @@
-﻿using Raylib_cs;
+﻿using System;
+using Raylib_cs;
 using steroid_port.Game.Services;
+using steroid_port.Game.States.Base;
 using steroid_port.Game.Utils;
 
 namespace steroid_port.Game.Systems.UI
@@ -37,15 +39,25 @@ namespace steroid_port.Game.Systems.UI
         public override void Update()
         {
             DrawTexts();
+            DrawLifes();
         }
 
         private void DrawTexts()
         {
+            if (CurrentState.StateType != StateType.InitGameState) return;
+            
             Raylib.DrawText(_texts[0], (int)_screenService.CurrentSize.X/2 - _textSizes[0]/2, 0, 16, Color.YELLOW);
             Raylib.DrawText(_texts[1], (int)_screenService.CurrentSize.X/2 - _textSizes[1]/2, 20, 16, Color.YELLOW);
             
             Raylib.DrawText(_texts[2], (int)_screenService.CurrentSize.X/2 - _textSizes[2]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
             Raylib.DrawText(_texts[3], (int)_screenService.CurrentSize.X/2 - _textSizes[3]/2, (int)_screenService.CurrentSize.Y - 16, 16, Color.YELLOW);
+        }
+
+        private void DrawLifes()
+        {
+            if (CurrentState.StateType != StateType.GameState) return;
+            
+            Console.WriteLine("Drawing lifes");
         }
     }
 }
