@@ -14,6 +14,7 @@ namespace steroid.Game
         private AsteroidManager _asteroidManager;
         private CollisionSystem _collisionSystem;
         private GameSystem _gameSystem;
+        private bool _isReady = false;
         
         public Steroid()
         {
@@ -33,6 +34,8 @@ namespace steroid.Game
             CreateAsteroids();
 
             InitSystems();
+
+            _isReady = true;
         }
 
         private void InitSystems()
@@ -43,8 +46,11 @@ namespace steroid.Game
 
         private void OnCollision()
         {
+            _isReady = false;
             _ship.Hit();
             _miniShip.Hit();
+            _asteroidManager.Init();
+            _isReady = true;
         }
 
         public void Update()
@@ -53,6 +59,8 @@ namespace steroid.Game
             Raylib.ClearBackground(Color.BLACK);
             
             Raylib.DrawTexture(_texture, 0,0,Color.WHITE);
+
+            if (!_isReady) return;
             
             _collisionSystem.Update();
             

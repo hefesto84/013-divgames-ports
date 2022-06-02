@@ -11,14 +11,14 @@ namespace steroid.Game
     {
         private int _life;
         private Texture2D _texture;
-        private bool _isReady = false;
+        //private bool _isReady = false;
         private double _x;
         private double _y;
         private double _velX;
         private double _velY;
         private float _rotation = 0f;
         private Random _r = new Random();
-        private int _spriteId;
+        //private int _spriteId;
         private Rectangle _spriteData;
         private Rectangle _bounds;
 
