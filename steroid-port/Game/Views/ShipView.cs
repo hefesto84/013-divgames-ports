@@ -10,6 +10,7 @@ namespace steroid_port.Game.Views
     public class ShipView : View
     {
         private Tuple<Rectangle,Texture2D> _textureData;
+        private Rectangle _destination;
 
         public ShipView(RenderService renderService) : base(renderService)
         {
@@ -18,11 +19,18 @@ namespace steroid_port.Game.Views
         public void Init(SpriteService spriteService)
         {
             _textureData = spriteService.Get("ship");
+            _destination = new Rectangle(0, 0, _textureData.Item1.width, _textureData.Item1.height);
         }
         
-        public void UpdateView(Vector3 position)
+        public void UpdateView(Vector2 position, int rotation)
         {
-            RenderService.Render(_textureData.Item2, _textureData.Item1, new Rectangle(position.X,position.Y,_textureData.Item1.width, _textureData.Item1.height));
+            Console.WriteLine("RO: "+rotation);
+            
+            _destination.x = position.X;
+            _destination.y = position.Y;
+            
+            RenderService.Render(_textureData.Item2, _textureData.Item1, _destination, new Vector2(_destination.width/2, _destination.height/2), rotation);
+            //RenderService.Render(_textureData.Item2, _textureData.Item1, new Rectangle(position.X,position.Y,_textureData.Item1.width, _textureData.Item1.height));
         }
     }
 }

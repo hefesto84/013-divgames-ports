@@ -20,6 +20,7 @@ namespace steroid_port.Game.States
 
         public override void Start()
         {
+            _uiSystem.Init();
             _uiSystem.SetState(this);
         }
 

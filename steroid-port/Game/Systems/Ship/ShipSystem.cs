@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Raylib_cs;
 using steroid_port.Game.Services;
 using steroid_port.Game.Views;
@@ -12,7 +13,11 @@ namespace steroid_port.Game.Systems.Ship
         private readonly SpriteService _spriteService;
         
         private ShipView _view;
-        private Vector3 _currentPosition = Vector3.Zero;
+        
+        private int _rotation;
+        private Vector2 _velocity = Vector2.Zero;
+        private Vector2 _thrust = Vector2.Zero;
+        private Vector2 _currentPosition = Vector2.Zero;
         
         public ShipSystem(ScreenService screenService, SpriteService  spriteService, RenderService renderService)
         {
@@ -30,6 +35,7 @@ namespace steroid_port.Game.Systems.Ship
         public override void Reset()
         {
             _currentPosition = _screenService.CurrentScreenCenter;
+            _rotation = 0;
         }
 
         public override void Update()
@@ -37,12 +43,12 @@ namespace steroid_port.Game.Systems.Ship
             ProcessMovement();
             FixPosition();
             
-            _view.UpdateView(_currentPosition);
-            
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 Reset();
             }
+            
+            _view.UpdateView(_currentPosition, _rotation);
         }
 
         private void SetupShipView()
@@ -55,7 +61,21 @@ namespace steroid_port.Game.Systems.Ship
 
         private void ProcessMovement()
         {
-            _currentPosition.X += 1;
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) _rotation += 1;
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) _rotation -= 1;
+            if(Raylib.IsKeyDown(KeyboardKey.KEY_UP)) Boost();
+
+            _currentPosition.X += _velocity.X;
+            _currentPosition.Y += _velocity.Y;
+        }
+
+        private void Boost()
+        {
+            var rads = _rotation * MathF.PI / 180;
+            _thrust.X = MathF.Cos(rads) * 0.1f;
+            _thrust.Y = MathF.Sin(rads) * 0.1f;
+            _velocity.X += _thrust.X;
+            _velocity.Y += _thrust.Y;
         }
         
         private void FixPosition()

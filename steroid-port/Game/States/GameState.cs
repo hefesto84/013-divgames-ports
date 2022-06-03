@@ -49,7 +49,7 @@ namespace steroid_port.Game.States
             _gameSystem.OnGameOver -= OnGameOver;
         }
         
-        private void OnGameOver(int score)
+        private void OnGameOver()
         {
             GameManager.SetState(GameManager.StateFactory.Get(StateType.GameOverState));
         }

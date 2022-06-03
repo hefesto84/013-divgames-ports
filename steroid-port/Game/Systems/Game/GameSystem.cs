@@ -6,7 +6,7 @@ namespace steroid_port.Game.Systems.Game
 {
     public class GameSystem : Base.System
     {
-        public Action<int> OnGameOver { get; set; }
+        public Action OnGameOver { get; set; }
         
         private readonly GameService _gameService;
         private int _currentLives = 0;
@@ -38,7 +38,8 @@ namespace steroid_port.Game.Systems.Game
 
             if (_currentLives == 0)
             {
-                OnGameOver?.Invoke(100);
+                _gameService.CurrentScore = 100;
+                OnGameOver?.Invoke();
             }
         }
     }
