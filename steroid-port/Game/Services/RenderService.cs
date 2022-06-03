@@ -29,11 +29,6 @@ namespace steroid_port.Game.Services
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.BLACK);
-
-            for (var i = 0; i < _views.Count; i++)
-            {
-                Console.WriteLine($"Rendering: {_views[i].Id}");
-            }
         }
 
         public void End()
@@ -49,6 +44,12 @@ namespace steroid_port.Game.Services
         public void Render(Texture2D texture, Rectangle from, Rectangle to)
         {
             Raylib.DrawTexturePro(texture, from, to, new Vector2(0,0), 0, Color.WHITE);
+        }
+
+        public void Render(Texture2D texture, Rectangle from, Rectangle to, Vector2 center, int rotation)
+        {
+            Raylib.DrawTexturePro(texture, from,to, center,
+                rotation, Color.WHITE);
         }
     }
 }

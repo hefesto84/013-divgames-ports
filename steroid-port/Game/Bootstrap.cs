@@ -84,7 +84,7 @@ namespace steroid_port.Game
             _shipSystem = new ShipSystem(_screenService, _spriteService, _renderService);
             _backgroundSystem = new BackgroundSystem(_spriteService, _renderService);
             _renderSystem = new RenderSystem();
-            _uiSystem = new UISystem(_configService, _screenService, _utilities);
+            _uiSystem = new UISystem(_configService, _screenService, _renderService, _spriteService, _utilities);
         }
         
         private void InitFactories()

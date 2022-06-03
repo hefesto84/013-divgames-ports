@@ -3,6 +3,7 @@ using Raylib_cs;
 using steroid_port.Game.Services;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Utils;
+using steroid_port.Game.Views;
 
 namespace steroid_port.Game.Systems.UI
 {
@@ -11,13 +12,18 @@ namespace steroid_port.Game.Systems.UI
         private readonly ConfigService _configService;
         private readonly ScreenService _screenService;
         private readonly Utilities _utilities;
+        private readonly RenderService _renderService;
+        private readonly SpriteService _spriteService;
         private int[] _textSizes;
         private string[] _texts;
+        private LifesView _lifesView;
 
-        public UISystem(ConfigService configService, ScreenService screenService,  Utilities utilities)
+        public UISystem(ConfigService configService, ScreenService screenService,  RenderService renderService, SpriteService spriteService, Utilities utilities)
         {
             _screenService = screenService;
             _configService = configService;
+            _renderService = renderService;
+            _spriteService = spriteService;
             _utilities = utilities;
         }
         public override void Init()
@@ -34,6 +40,8 @@ namespace steroid_port.Game.Systems.UI
             {
                 _textSizes[i] = _utilities.GetTextWidth(_texts[i], 16);
             }
+            
+            SetupLifesView();
         }
 
         public override void Update()
@@ -42,6 +50,14 @@ namespace steroid_port.Game.Systems.UI
             DrawLifes();
         }
 
+        private void SetupLifesView()
+        {
+            if (_lifesView != null) return;
+            
+            _lifesView = new LifesView(_renderService);
+            _lifesView.Init(_spriteService);
+        }
+        
         private void DrawTexts()
         {
             if (CurrentState.StateType != StateType.InitGameState) return;
@@ -57,7 +73,8 @@ namespace steroid_port.Game.Systems.UI
         {
             if (CurrentState.StateType != StateType.GameState) return;
             
-            Console.WriteLine("Drawing lifes");
+            _lifesView.UpdateView(3);
+            //Console.WriteLine("Drawing lifes");
         }
     }
 }
