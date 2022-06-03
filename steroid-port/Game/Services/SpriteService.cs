@@ -32,9 +32,15 @@ namespace steroid_port.Game.Services
             
             _spriteData = new Dictionary<string, Rectangle>();
             _spriteData.Add("ship",new Rectangle(0,0,33,21));
+            _spriteData.Add("asteroid-0", new Rectangle(53,0,50,50));
+            _spriteData.Add("asteroid-1", new Rectangle(104,0,40,40));
+            _spriteData.Add("asteroid-2", new Rectangle(146,0,24,24));
 
             _textureData = new Dictionary<string, Texture2D>();
             _textureData.Add("ship", _mainTexture);
+            _textureData.Add("asteroid-0",_mainTexture);
+            _textureData.Add("asteroid-1",_mainTexture);
+            _textureData.Add("asteroid-2",_mainTexture);
             
             CreateBackgroundTexture();
             

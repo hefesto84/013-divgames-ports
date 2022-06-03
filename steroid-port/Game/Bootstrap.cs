@@ -6,6 +6,7 @@ using steroid_port.Game.Managers;
 using steroid_port.Game.Services;
 using steroid_port.Game.States;
 using steroid_port.Game.States.Base;
+using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;
 using steroid_port.Game.Systems.Game;
 using steroid_port.Game.Systems.Render;
@@ -27,10 +28,12 @@ namespace steroid_port.Game
         private Utilities _utilities;
 
         private ShipSystem _shipSystem;
+        private AsteroidsSystem _asteroidsSystem;
         private BackgroundSystem _backgroundSystem;
         private RenderSystem _renderSystem;
         private GameSystem _gameSystem;
         private UISystem _uiSystem;
+        
         
         public bool IsQuit => Raylib.WindowShouldClose();
 
@@ -87,6 +90,7 @@ namespace steroid_port.Game
         private void BuildSystems()
         {
             _shipSystem = new ShipSystem(_screenService, _spriteService, _renderService);
+            _asteroidsSystem = new AsteroidsSystem(_screenService, _spriteService, _renderService);
             _backgroundSystem = new BackgroundSystem(_spriteService, _renderService);
             _renderSystem = new RenderSystem();
             _uiSystem = new UISystem(_configService, _screenService, _renderService, _spriteService, _gameService, _utilities);
@@ -98,7 +102,7 @@ namespace steroid_port.Game
             _stateFactory = new StateFactory();
             _stateFactory.Init();
             _stateFactory.RegisterState(new InitGameState(_gameManager, _uiSystem, _backgroundSystem, StateType.InitGameState));
-            _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _uiSystem, _gameSystem, StateType.GameState));
+            _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _asteroidsSystem, _uiSystem, _gameSystem, StateType.GameState));
             _stateFactory.RegisterState(new GameOverState(_gameManager, _backgroundSystem, _uiSystem, StateType.GameOverState));
         }
 

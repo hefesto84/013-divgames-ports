@@ -83,6 +83,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Systems/Asteroids/AsteroidsSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Systems/Background/BackgroundSystem.cs">
           <value>
             <set />
@@ -124,6 +129,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Utils/Utilities.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/AsteroidView.cs">
           <value>
             <set />
           </value>

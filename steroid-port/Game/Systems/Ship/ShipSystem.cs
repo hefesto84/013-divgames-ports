@@ -63,8 +63,8 @@ namespace steroid_port.Game.Systems.Ship
 
         private void ProcessMovement()
         {
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) _rotation += 1;
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) _rotation -= 1;
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) _rotation += 5;
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) _rotation -= 5;
             if(Raylib.IsKeyDown(KeyboardKey.KEY_UP)) Boost();
 
             _currentPosition.X += _velocity.X;
