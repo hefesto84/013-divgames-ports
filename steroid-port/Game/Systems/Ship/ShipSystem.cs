@@ -36,6 +36,8 @@ namespace steroid_port.Game.Systems.Ship
         {
             _currentPosition = _screenService.CurrentScreenCenter;
             _rotation = 0;
+            _thrust = Vector2.Zero;
+            _velocity = Vector2.Zero;
         }
 
         public override void Update()
