@@ -25,6 +25,7 @@ namespace steroid_port.Game.Systems.Game
         {
             _currentLives = 3;
             _gameService.SetLives(3);
+            _gameService.CurrentScore = 0;
         }
 
         public override void Update()

@@ -99,7 +99,7 @@ namespace steroid_port.Game
             _stateFactory.Init();
             _stateFactory.RegisterState(new InitGameState(_gameManager, _uiSystem, _backgroundSystem, StateType.InitGameState));
             _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _uiSystem, _gameSystem, StateType.GameState));
-            _stateFactory.RegisterState(new GameOverState(_gameManager, StateType.GameOverState));
+            _stateFactory.RegisterState(new GameOverState(_gameManager, _backgroundSystem, _uiSystem, StateType.GameOverState));
         }
 
         ~Bootstrap()

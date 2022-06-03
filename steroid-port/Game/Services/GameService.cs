@@ -6,6 +6,7 @@ namespace steroid_port.Game.Services
     {
         public Action<int> OnLivesUpdated { get; set; }
         public int MaxLives { get; set; }
+        public int CurrentScore { get; set; }
         
         private int _currentLives = 0;
         
@@ -28,6 +29,7 @@ namespace steroid_port.Game.Services
         private void Reset()
         {
             _currentLives = 3;
+            CurrentScore = 0;
         }
     }
 }

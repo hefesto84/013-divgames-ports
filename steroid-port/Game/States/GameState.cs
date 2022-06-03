@@ -51,8 +51,7 @@ namespace steroid_port.Game.States
         
         private void OnGameOver(int score)
         {
-            Console.WriteLine($"Game Over: {score} points");
-            GameManager.SetState(GameManager.StateFactory.Get(StateType.InitGameState));
+            GameManager.SetState(GameManager.StateFactory.Get(StateType.GameOverState));
         }
     }
 }
