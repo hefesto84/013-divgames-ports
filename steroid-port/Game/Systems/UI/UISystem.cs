@@ -14,16 +14,18 @@ namespace steroid_port.Game.Systems.UI
         private readonly Utilities _utilities;
         private readonly RenderService _renderService;
         private readonly SpriteService _spriteService;
+        private readonly GameService _gameService;
         private int[] _textSizes;
         private string[] _texts;
-        private LifesView _lifesView;
+        private LivesView _livesView;
 
-        public UISystem(ConfigService configService, ScreenService screenService,  RenderService renderService, SpriteService spriteService, Utilities utilities)
+        public UISystem(ConfigService configService, ScreenService screenService,  RenderService renderService, SpriteService spriteService, GameService gameService, Utilities utilities)
         {
             _screenService = screenService;
             _configService = configService;
             _renderService = renderService;
             _spriteService = spriteService;
+            _gameService = gameService;
             _utilities = utilities;
         }
         public override void Init()
@@ -41,21 +43,21 @@ namespace steroid_port.Game.Systems.UI
                 _textSizes[i] = _utilities.GetTextWidth(_texts[i], 16);
             }
             
-            SetupLifesView();
+            SetupLivesView();
         }
 
         public override void Update()
         {
             DrawTexts();
-            DrawLifes();
+            DrawLives();
         }
 
-        private void SetupLifesView()
+        private void SetupLivesView()
         {
-            if (_lifesView != null) return;
+            if (_livesView != null) return;
             
-            _lifesView = new LifesView(_renderService);
-            _lifesView.Init(_spriteService);
+            _livesView = new LivesView(_renderService, _gameService);
+            _livesView.Init(_spriteService);
         }
         
         private void DrawTexts()
@@ -69,12 +71,10 @@ namespace steroid_port.Game.Systems.UI
             Raylib.DrawText(_texts[3], (int)_screenService.CurrentSize.X/2 - _textSizes[3]/2, (int)_screenService.CurrentSize.Y - 16, 16, Color.YELLOW);
         }
 
-        private void DrawLifes()
+        private void DrawLives()
         {
             if (CurrentState.StateType != StateType.GameState) return;
-            
-            _lifesView.UpdateView(3);
-            //Console.WriteLine("Drawing lifes");
+            _livesView.UpdateView();
         }
     }
 }

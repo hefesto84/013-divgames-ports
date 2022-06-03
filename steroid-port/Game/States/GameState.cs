@@ -1,6 +1,8 @@
-﻿using steroid_port.Game.Managers;
+﻿using System;
+using steroid_port.Game.Managers;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Background;
+using steroid_port.Game.Systems.Game;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Systems.UI;
 
@@ -11,12 +13,14 @@ namespace steroid_port.Game.States
         private readonly ShipSystem _shipSystem;
         private readonly BackgroundSystem _backgroundSystem;
         private readonly UISystem _uiSystem;
+        private readonly GameSystem _gameSystem;
         
-        public GameState(GameManager gameManager, BackgroundSystem backgroundSystem, ShipSystem shipSystem, UISystem uiSystem, StateType stateType) : base(gameManager, stateType)
+        public GameState(GameManager gameManager, BackgroundSystem backgroundSystem, ShipSystem shipSystem, UISystem uiSystem, GameSystem gameSystem, StateType stateType) : base(gameManager, stateType)
         {
             _backgroundSystem = backgroundSystem;
             _shipSystem = shipSystem;
             _uiSystem = uiSystem;
+            _gameSystem = gameSystem;
         }
 
         public override void Start()
@@ -24,15 +28,31 @@ namespace steroid_port.Game.States
             _backgroundSystem.Init();
             _shipSystem.Init();
             _uiSystem.Init();
+            _gameSystem.Init();
+            
+            _gameSystem.OnGameOver += OnGameOver;
             
             _uiSystem.SetState(this);
         }
 
         public override void DoState()
         {
+            _gameSystem.Update();
+            
             _backgroundSystem.Update();
             _shipSystem.Update();
             _uiSystem.Update();
+        }
+
+        public override void Stop()
+        {
+            _gameSystem.OnGameOver -= OnGameOver;
+        }
+        
+        private void OnGameOver(int score)
+        {
+            Console.WriteLine($"Game Over: {score} points");
+            GameManager.SetState(GameManager.StateFactory.Get(StateType.InitGameState));
         }
     }
 }

@@ -43,6 +43,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Services/GameService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Services/RenderService.cs">
           <value>
             <set />
@@ -93,6 +98,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Systems/Game/GameSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Systems/Render/RenderSystem.cs">
           <value>
             <set />
@@ -129,6 +139,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Views/LifesView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/LivesView.cs">
           <value>
             <set />
           </value>
