@@ -93,7 +93,7 @@ namespace steroid_port.Game
         {
             _shipSystem = new ShipSystem(_screenService, _spriteService, _renderService);
             _asteroidsSystem = new AsteroidsSystem(_screenService, _spriteService, _renderService);
-            _shotSystem = new ShotSystem(_screenService, _spriteService, _renderService);
+            _shotSystem = new ShotSystem(_screenService, _spriteService, _renderService, _shipSystem);
             _backgroundSystem = new BackgroundSystem(_spriteService, _renderService);
             _renderSystem = new RenderSystem();
             _uiSystem = new UISystem(_configService, _screenService, _renderService, _spriteService, _gameService, _utilities);

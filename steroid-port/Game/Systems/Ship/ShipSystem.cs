@@ -18,7 +18,11 @@ namespace steroid_port.Game.Systems.Ship
         private Vector2 _velocity = Vector2.Zero;
         private Vector2 _thrust = Vector2.Zero;
         private Vector2 _currentPosition = Vector2.Zero;
-        
+
+        public Vector2 CurrentPosition => _currentPosition;
+        public int CurrentRotation => _rotation;
+        public Vector2 CurrentVelocity => _velocity;
+
         public ShipSystem(ScreenService screenService, SpriteService  spriteService, RenderService renderService)
         {
             _screenService = screenService;
