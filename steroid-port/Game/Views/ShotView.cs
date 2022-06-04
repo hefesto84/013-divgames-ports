@@ -17,7 +17,7 @@ namespace steroid_port.Game.Views
         private int _rotation;
         private const float Pi180 = MathF.PI / 180;
         private float _rads;
-        private const int ShotSpeed = 5;
+        private const int ShotSpeed = 8;
         private const int InitialShotSpeed = 10;
         
         public Action<ShotView> OnOutOfScreen { get; set; }
@@ -46,8 +46,8 @@ namespace steroid_port.Game.Views
             
             _currentPosition.X = position.X + InitialShotSpeed * MathF.Cos(_rads);
             _currentPosition.Y = position.Y + InitialShotSpeed * MathF.Sin(_rads);
-            _velocity.X = ShotSpeed * MathF.Cos(_rads) + velocity.X;
-            _velocity.Y = ShotSpeed * MathF.Sin(_rads) + velocity.Y;
+            _velocity.X = ShotSpeed * MathF.Cos(_rads);
+            _velocity.Y = ShotSpeed * MathF.Sin(_rads);
         }
         public void UpdateView()
         {

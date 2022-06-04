@@ -3,6 +3,7 @@ using steroid_port.Game.Managers;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;
+using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Systems.Game;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Systems.Shot;
@@ -15,6 +16,7 @@ namespace steroid_port.Game.States
         private readonly ShipSystem _shipSystem;
         private readonly AsteroidsSystem _asteroidsSystem;
         private readonly ShotSystem _shotSystem;
+        private readonly CollisionSystem _collisionSystem;
         private readonly BackgroundSystem _backgroundSystem;
         private readonly UISystem _uiSystem;
         private readonly GameSystem _gameSystem;
@@ -25,12 +27,14 @@ namespace steroid_port.Game.States
             ShipSystem shipSystem, 
             AsteroidsSystem asteroidsSystem, 
             ShotSystem shotSystem,
+            CollisionSystem collisionSystem,
             UISystem uiSystem, GameSystem gameSystem, StateType stateType) : base(gameManager, stateType)
         {
             _backgroundSystem = backgroundSystem;
             _shipSystem = shipSystem;
             _shotSystem = shotSystem;
             _asteroidsSystem = asteroidsSystem;
+            _collisionSystem = collisionSystem;
             _uiSystem = uiSystem;
             _gameSystem = gameSystem;
         }
@@ -41,6 +45,7 @@ namespace steroid_port.Game.States
             _shipSystem.Init();
             _shotSystem.Init();
             _asteroidsSystem.Init();
+            _collisionSystem.Init();
             _uiSystem.Init();
             _gameSystem.Init();
             
@@ -57,6 +62,9 @@ namespace steroid_port.Game.States
             _shipSystem.Update();
             _asteroidsSystem.Update();
             _shotSystem.Update();
+            
+            _collisionSystem.Update();
+            
             _uiSystem.Update();
         }
 

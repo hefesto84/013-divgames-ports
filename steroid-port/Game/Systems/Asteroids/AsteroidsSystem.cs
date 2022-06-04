@@ -18,7 +18,7 @@ namespace steroid_port.Game.Systems.Asteroids
         private int _initialAsteroids = 6;
 
         private readonly Random _random;
-        
+
         public AsteroidsSystem(ScreenService screenService, SpriteService spriteService, RenderService renderService)
         {
             _screenService = screenService;

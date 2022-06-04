@@ -8,6 +8,7 @@ using steroid_port.Game.States;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;
+using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Systems.Game;
 using steroid_port.Game.Systems.Render;
 using steroid_port.Game.Systems.Ship;
@@ -31,6 +32,7 @@ namespace steroid_port.Game
         private ShipSystem _shipSystem;
         private AsteroidsSystem _asteroidsSystem;
         private ShotSystem _shotSystem;
+        private CollisionSystem _collisionSystem;
         private BackgroundSystem _backgroundSystem;
         private RenderSystem _renderSystem;
         private GameSystem _gameSystem;
@@ -94,6 +96,7 @@ namespace steroid_port.Game
             _shipSystem = new ShipSystem(_screenService, _spriteService, _renderService);
             _asteroidsSystem = new AsteroidsSystem(_screenService, _spriteService, _renderService);
             _shotSystem = new ShotSystem(_screenService, _spriteService, _renderService, _shipSystem);
+            _collisionSystem = new CollisionSystem(_shipSystem, _asteroidsSystem, _shotSystem);
             _backgroundSystem = new BackgroundSystem(_spriteService, _renderService);
             _renderSystem = new RenderSystem();
             _uiSystem = new UISystem(_configService, _screenService, _renderService, _spriteService, _gameService, _utilities);
@@ -105,7 +108,7 @@ namespace steroid_port.Game
             _stateFactory = new StateFactory();
             _stateFactory.Init();
             _stateFactory.RegisterState(new InitGameState(_gameManager, _uiSystem, _backgroundSystem, StateType.InitGameState));
-            _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _asteroidsSystem, _shotSystem, _uiSystem, _gameSystem, StateType.GameState));
+            _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _asteroidsSystem, _shotSystem, _collisionSystem, _uiSystem, _gameSystem, StateType.GameState));
             _stateFactory.RegisterState(new GameOverState(_gameManager, _backgroundSystem, _uiSystem, StateType.GameOverState));
         }
 
