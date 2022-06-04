@@ -11,10 +11,12 @@ namespace steroid_port.Game.Views.Base
         public Texture2D Texture2D { get; set; }
         public Vector3 Position { get; set; }
         public int Id { get; protected set; }
-
-        public View(RenderService renderService)
+        protected Vector2 CurrentScreenSize { get; set; }
+        
+        public View(RenderService renderService, ScreenService screenService)
         {
             RenderService = renderService;
+            CurrentScreenSize = screenService.CurrentSize;
         }
         
         protected RenderService RenderService { get; }

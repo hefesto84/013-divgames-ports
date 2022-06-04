@@ -61,7 +61,7 @@ namespace steroid_port.Game.Systems.Ship
         {
             if (_view != null) return;
             
-            _view = new ShipView(_renderService);
+            _view = new ShipView(_renderService, _screenService);
             _view.Init(_spriteService);
         }
 

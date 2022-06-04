@@ -13,7 +13,7 @@ namespace steroid_port.Game.Views
         private Vector2 _asteroidCenter;
         private Vector2 _currentPosition;
         
-        public AsteroidView(RenderService renderService) : base(renderService)
+        public AsteroidView(RenderService renderService, ScreenService screenService) : base(renderService, screenService)
         {
             
         }

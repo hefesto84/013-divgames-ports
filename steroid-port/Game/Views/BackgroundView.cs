@@ -5,7 +5,7 @@ namespace steroid_port.Game.Views
 {
     public class BackgroundView : View
     {
-        public BackgroundView(RenderService renderService) : base(renderService)
+        public BackgroundView(RenderService renderService, ScreenService screenService) : base(renderService, screenService)
         {
         }
     }

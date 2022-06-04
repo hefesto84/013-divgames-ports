@@ -18,7 +18,7 @@ namespace steroid_port.Game.Views
         private LifeViewData[] _livesViewData;
         private readonly GameService _gameService;
         
-        public LivesView(RenderService renderService, GameService gameService) : base(renderService)
+        public LivesView(RenderService renderService, GameService gameService, ScreenService screenService) : base(renderService, screenService)
         {
             _gameService = gameService;
             _gameService.OnLivesUpdated += OnLivesUpdated;

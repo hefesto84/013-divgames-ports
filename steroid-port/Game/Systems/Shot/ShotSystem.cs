@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Numerics;
+using System.Collections.Generic;
 using Raylib_cs;
 using steroid_port.Game.Services;
 using steroid_port.Game.Systems.Ship;
@@ -13,7 +13,12 @@ namespace steroid_port.Game.Systems.Shot
         private readonly SpriteService _spriteService;
         private readonly RenderService _renderService;
         private readonly ShipSystem _shipSystem;
-        private ShotView _view;
+
+        private Queue<ShotView> _views;
+        private List<ShotView> _currentUsedViews;
+        private List<ShotView> _toRecycle;
+
+        private int _maxShots = 10;
         
         public ShotSystem(ScreenService screenService, SpriteService spriteService, RenderService renderService, ShipSystem shipSystem)
         {
@@ -30,31 +35,76 @@ namespace steroid_port.Game.Systems.Shot
 
         public override void Reset()
         {
-            
+            _views ??= new Queue<ShotView>(_maxShots);
+            _currentUsedViews ??= new List<ShotView>(_maxShots);
+            _toRecycle ??= new List<ShotView>(_maxShots);
+
+            _views.Clear();
+            _currentUsedViews.Clear();
+
+            SetupShotView();
         }
 
         public override void Update()
         {
+            Recycle();
+            
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_F))
             {
                 Shoot();
             }
 
-            _view?.UpdateView();
+            var list = _currentUsedViews.GetEnumerator();
+
+            while (list.MoveNext())
+            {
+                list.Current?.UpdateView();
+            }
+            
+            list.Dispose();
         }
 
+        private void Recycle()
+        {
+            foreach (var t in _currentUsedViews)
+            {
+                if(!t.IsReady) continue;
+                _toRecycle.Add(t);
+            }
+
+            foreach (var t in _toRecycle)
+            {
+                _currentUsedViews.Remove(t);
+                _views.Enqueue(t);
+            }
+            
+            _toRecycle.Clear();
+        }
+        
         private void Shoot()
         {
-            SetupShotView();
-            _view.SetView(_shipSystem.CurrentPosition, _shipSystem.CurrentVelocity, _shipSystem.CurrentRotation);
+            if (_views.Count != 0)
+            {
+                var v = _views.Dequeue();
+                v.SetView(_shipSystem.CurrentPosition, _shipSystem.CurrentVelocity, _shipSystem.CurrentRotation);
+                v.OnOutOfScreen = OnShotReadyToBeUsed;
+                _currentUsedViews.Add(v);
+            }
         }
         
         private void SetupShotView()
         {
-            if (_view != null) return;
-            
-            _view = new ShotView(_renderService);
-            _view.Init(_spriteService);
+            for (var i = 0; i < 10; i++)
+            {
+                var view = new ShotView(_renderService, _screenService);
+                view.Init(_spriteService);
+                _views.Enqueue(view);
+            }
+        }
+
+        public void OnShotReadyToBeUsed(ShotView shotView)
+        {
+            //_toRecycle.Add(shotView);
         }
     }
 }

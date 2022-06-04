@@ -55,7 +55,7 @@ namespace steroid_port.Game.Systems.Asteroids
         {
             for (var i = 0; i < _initialAsteroids; i++)
             {
-                _views.Add(new AsteroidView(_renderService));
+                _views.Add(new AsteroidView(_renderService, _screenService));
                 _views[i].Init(_spriteService, new Vector2(_random.Next(0, (int) _screenService.CurrentSize.X), _random.Next(0, (int) _screenService.CurrentSize.Y)));
             }
         }

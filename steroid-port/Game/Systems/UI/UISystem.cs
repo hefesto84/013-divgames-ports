@@ -58,7 +58,7 @@ namespace steroid_port.Game.Systems.UI
         {
             if (_livesView != null) return;
             
-            _livesView = new LivesView(_renderService, _gameService);
+            _livesView = new LivesView(_renderService, _gameService, _screenService);
             _livesView.Init(_spriteService);
         }
         

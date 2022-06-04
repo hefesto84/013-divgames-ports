@@ -13,7 +13,7 @@ namespace steroid_port.Game.Views
         private Rectangle _destination;
         private Vector2 _shipCenter;
 
-        public ShipView(RenderService renderService) : base(renderService)
+        public ShipView(RenderService renderService, ScreenService screenService) : base(renderService, screenService)
         {
             
         }
