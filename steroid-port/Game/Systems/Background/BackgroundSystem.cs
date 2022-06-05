@@ -1,6 +1,6 @@
-﻿using System;
-using Raylib_cs;
-using steroid_port.Game.Services;
+﻿using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Sprite;
+using steroid_port.Game.Views.Background;
 
 namespace steroid_port.Game.Systems.Background
 {
@@ -8,7 +8,8 @@ namespace steroid_port.Game.Systems.Background
     {
         private readonly SpriteService _spriteService;
         private readonly RenderService _renderService;
-        private Tuple<Rectangle, Texture2D> _textureData;
+
+        private BackgroundView _view;
         
         public BackgroundSystem(SpriteService spriteService, RenderService renderService)
         {
@@ -18,12 +19,21 @@ namespace steroid_port.Game.Systems.Background
         
         public override void Init()
         {
-           _textureData = _spriteService.Get("background");
+            SetupBackgroundView();
+            Reset();
         }
 
         public override void Update()
         {
-            _renderService.Render(_textureData.Item2, new Rectangle(0,0,_textureData.Item2.width, _textureData.Item2.height));
+            _view.UpdateView();
+        }
+
+        private void SetupBackgroundView()
+        {
+            if (_view != null) return;
+            
+            _view = new BackgroundView(_renderService);
+            _view.Init(_spriteService);
         }
     }
 }

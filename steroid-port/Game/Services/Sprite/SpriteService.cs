@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using Raylib_cs;
+using steroid_port.Game.Services.Screen;
 
-namespace steroid_port.Game.Services
+namespace steroid_port.Game.Services.Sprite
 {
     public class SpriteService
     {
@@ -28,7 +29,6 @@ namespace steroid_port.Game.Services
         public void Init()
         {
             _mainTexture = Raylib.LoadTexture(Directory.GetCurrentDirectory()+"/steroid.png");
-            
             
             _spriteData = new Dictionary<string, Rectangle>();
             _spriteData.Add("ship",new Rectangle(0,0,33,21));

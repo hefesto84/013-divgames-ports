@@ -1,22 +1,17 @@
 ﻿using System.Numerics;
 using Raylib_cs;
-using steroid_port.Game.Components;
-using steroid_port.Game.Services;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
 
 namespace steroid_port.Game.Views.Base
 {
-    public class View : IRenderable
+    public class View
     {
-        public Rectangle Bounds { get; set; }
-        public Texture2D Texture2D { get; set; }
-        public Vector3 Position { get; set; }
-        public int Id { get; protected set; }
-        protected Vector2 CurrentScreenSize { get; set; }
-        
-        public View(RenderService renderService, ScreenService screenService)
+        public Rectangle Bounds { get; protected set; }
+
+        protected View(RenderService renderService)
         {
             RenderService = renderService;
-            CurrentScreenSize = screenService.CurrentSize;
         }
         
         protected RenderService RenderService { get; }

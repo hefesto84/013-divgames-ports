@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Numerics;
 using Raylib_cs;
-using steroid_port.Game.Services;
-using steroid_port.Game.Systems.Ship;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Views.Base;
 
-namespace steroid_port.Game.Views
+namespace steroid_port.Game.Views.Ship
 {
     public class ShipView : View
     {
@@ -13,10 +13,7 @@ namespace steroid_port.Game.Views
         private Rectangle _destination;
         private Vector2 _shipCenter;
 
-        public ShipView(RenderService renderService, ScreenService screenService) : base(renderService, screenService)
-        {
-            
-        }
+        public ShipView(RenderService renderService) : base(renderService) { }
         
         public void Init(SpriteService spriteService)
         {

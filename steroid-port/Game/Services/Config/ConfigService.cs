@@ -1,6 +1,6 @@
-﻿using steroid_port.Game.Configurations;
+﻿using steroid_port.Game.Configurations.Steroid;
 
-namespace steroid_port.Game.Services
+namespace steroid_port.Game.Services.Config
 {
     public class ConfigService
     {

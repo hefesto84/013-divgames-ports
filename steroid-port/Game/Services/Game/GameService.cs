@@ -1,15 +1,11 @@
-﻿using System;
-
-namespace steroid_port.Game.Services
+﻿namespace steroid_port.Game.Services.Game
 {
     public class GameService
     {
-        public Action<int> OnLivesUpdated { get; set; }
-        public int MaxLives { get; set; }
+        public int MaxLives { get; }
         public int CurrentScore { get; set; }
         public int CurrentLevel { get; set; }
-        
-        private int _currentLives = 0;
+        public int CurrentLives { get; set; }
         
         public GameService()
         {
@@ -21,15 +17,9 @@ namespace steroid_port.Game.Services
             Reset();
         }
 
-        public void SetLives(int lives)
-        {
-            _currentLives = lives;
-            OnLivesUpdated?.Invoke(_currentLives);
-        }
-        
         private void Reset()
         {
-            _currentLives = 3;
+            CurrentLives = MaxLives;
             CurrentScore = 0;
             CurrentLevel = 1;
         }

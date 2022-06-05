@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Numerics;
 using Raylib_cs;
-using steroid_port.Game.Services;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Views.Base;
 
-namespace steroid_port.Game.Views
+namespace steroid_port.Game.Views.Asteroid
 {
     public class AsteroidView : View
     {
@@ -13,10 +15,7 @@ namespace steroid_port.Game.Views
         private Vector2 _asteroidCenter;
         private Vector2 _currentPosition;
         
-        public AsteroidView(RenderService renderService, ScreenService screenService) : base(renderService, screenService)
-        {
-            
-        }
+        public AsteroidView(RenderService renderService) : base(renderService) { }
         
         public void Init(SpriteService spriteService, Vector2 position)
         {

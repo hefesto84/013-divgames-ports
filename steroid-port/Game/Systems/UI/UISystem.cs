@@ -1,9 +1,12 @@
-﻿using System;
-using Raylib_cs;
-using steroid_port.Game.Services;
-using steroid_port.Game.States.Base;
+﻿using Raylib_cs;
+using steroid_port.Game.Enums;
+using steroid_port.Game.Services.Config;
+using steroid_port.Game.Services.Game;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Utils;
-using steroid_port.Game.Views;
+using steroid_port.Game.Views.Lives;
 
 namespace steroid_port.Game.Systems.UI
 {
@@ -60,7 +63,7 @@ namespace steroid_port.Game.Systems.UI
         {
             if (_livesView != null) return;
             
-            _livesView = new LivesView(_renderService, _gameService, _screenService);
+            _livesView = new LivesView(_renderService, _gameService);
             _livesView.Init(_spriteService);
         }
         
@@ -68,11 +71,11 @@ namespace steroid_port.Game.Systems.UI
         {
             if (CurrentState.StateType != StateType.InitGameState) return;
             
-            Raylib.DrawText(_texts[0], (int)_screenService.CurrentSize.X/2 - _textSizes[0]/2, 0, 16, Color.YELLOW);
-            Raylib.DrawText(_texts[1], (int)_screenService.CurrentSize.X/2 - _textSizes[1]/2, 20, 16, Color.YELLOW);
+            _renderService.RenderText(_texts[0], (int)_screenService.CurrentSize.X/2 - _textSizes[0]/2, 0, 16, Color.YELLOW);
+            _renderService.RenderText(_texts[1], (int)_screenService.CurrentSize.X/2 - _textSizes[1]/2, 20, 16, Color.YELLOW);
             
-            Raylib.DrawText(_texts[2], (int)_screenService.CurrentSize.X/2 - _textSizes[2]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
-            Raylib.DrawText(_texts[3], (int)_screenService.CurrentSize.X/2 - _textSizes[3]/2, (int)_screenService.CurrentSize.Y - 16, 16, Color.YELLOW);
+            _renderService.RenderText(_texts[2], (int)_screenService.CurrentSize.X/2 - _textSizes[2]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
+            _renderService.RenderText(_texts[3], (int)_screenService.CurrentSize.X/2 - _textSizes[3]/2, (int)_screenService.CurrentSize.Y - 16, 16, Color.YELLOW);
         }
 
         private void DrawLives()
@@ -85,14 +88,14 @@ namespace steroid_port.Game.Systems.UI
         {
             if (CurrentState.StateType != StateType.GameOverState) return;
             
-            Raylib.DrawText(_texts[4], (int)_screenService.CurrentSize.X/2 - _textSizes[4]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
+            _renderService.RenderText(_texts[4], (int)_screenService.CurrentSize.X/2 - _textSizes[4]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
         }
 
         private void DrawLevelCleared()
         {
             if (CurrentState.StateType != StateType.ClearedState) return;
             
-            Raylib.DrawText(_texts[5], (int)_screenService.CurrentSize.X/2 - _textSizes[5]/2, (int)_screenService.CurrentSize.Y / 2 - 8, 16, Color.YELLOW);
+            _renderService.RenderText(_texts[5], (int)_screenService.CurrentSize.X/2 - _textSizes[5]/2, (int)_screenService.CurrentSize.Y / 2 - 8, 16, Color.YELLOW);
         }
     }
 }

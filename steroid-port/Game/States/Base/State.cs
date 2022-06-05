@@ -1,22 +1,14 @@
-﻿using System;
-using System.Diagnostics;
+﻿using steroid_port.Game.Enums;
 using steroid_port.Game.Managers;
+using steroid_port.Game.Managers.Game;
 
 namespace steroid_port.Game.States.Base
 {
-    public enum StateType
-    {
-        InitGameState,
-        GameState,
-        GameOverState,
-        ClearedState
-    }
-    
     public abstract class State
     {
         protected readonly GameManager GameManager;
         
-        public StateType StateType { get; private set; }
+        public StateType StateType { get; }
         
         protected State(GameManager gameManager, StateType stateType)
         {
@@ -24,16 +16,10 @@ namespace steroid_port.Game.States.Base
             StateType = stateType;
         }
 
-        public virtual void Start()
-        {
-            Console.WriteLine($"{GetType()} Start");
-        }
+        public virtual void Start(){}
         
         public abstract void DoState();
 
-        public virtual void Stop()
-        {
-            Console.WriteLine($"{GetType()} Stop");
-        }
+        public virtual void Stop(){}
     }
 }

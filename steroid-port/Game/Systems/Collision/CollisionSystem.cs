@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Raylib_cs;
+using steroid_port.Game.Services.Collision;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Systems.Shot;
-using steroid_port.Game.Views;
+using steroid_port.Game.Views.Asteroid;
+using steroid_port.Game.Views.Ship;
+using steroid_port.Game.Views.Shot;
 
 namespace steroid_port.Game.Systems.Collision
 {
     public class CollisionSystem : Base.System
     {
+        private readonly CollisionService _collisionService;
         private readonly ShipSystem _shipSystem;
         private readonly AsteroidsSystem _asteroidsSystem;
         private readonly ShotSystem _shotSystem;
@@ -22,8 +25,10 @@ namespace steroid_port.Game.Systems.Collision
         private ShipView _ship;
         
         
-        public CollisionSystem(ShipSystem shipSystem, AsteroidsSystem asteroidsSystem, ShotSystem shotSystem)
+        public CollisionSystem(CollisionService collisionService, ShipSystem shipSystem, AsteroidsSystem asteroidsSystem, ShotSystem shotSystem)
         {
+            _collisionService = collisionService;
+            
             _shipSystem = shipSystem;
             _asteroidsSystem = asteroidsSystem;
             _shotSystem = shotSystem;
@@ -48,7 +53,7 @@ namespace steroid_port.Game.Systems.Collision
             
             for (var i = 0; i < _asteroids.Count; i++)
             {
-                if (!Raylib.CheckCollisionRecs(_asteroids[i].Bounds, _ship.Bounds)) continue;
+                if (!_collisionService.AreRectsColliding(_asteroids[i].Bounds, _ship.Bounds)) continue;
                 OnCollision?.Invoke();
                 return;
             }
@@ -69,7 +74,7 @@ namespace steroid_port.Game.Systems.Collision
                 
                 for (var j = 0; j < _asteroids.Count; j++)
                 {
-                    if (Raylib.CheckCollisionRecs(shotBounds, _asteroids[j].Bounds))
+                    if (_collisionService.AreRectsColliding(shotBounds, _asteroids[j].Bounds))
                     {
                         OnAsteroidShot?.Invoke(j);
                     }    

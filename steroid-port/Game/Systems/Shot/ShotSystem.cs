@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using Raylib_cs;
 using steroid_port.Game.Services;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Views;
+using steroid_port.Game.Views.Shot;
 
 namespace steroid_port.Game.Systems.Shot
 {

@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
-using Raylib_cs;
 
-namespace steroid_port.Game.Services
+namespace steroid_port.Game.Services.Screen
 {
     public class ScreenService
     {

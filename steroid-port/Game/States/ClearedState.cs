@@ -1,5 +1,7 @@
 ﻿using Raylib_cs;
+using steroid_port.Game.Enums;
 using steroid_port.Game.Managers;
+using steroid_port.Game.Managers.Game;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Background;
 using steroid_port.Game.Systems.UI;
@@ -32,11 +34,6 @@ namespace steroid_port.Game.States
             {
                 GameManager.SetState(GameManager.StateFactory.Get(StateType.GameState));
             }
-        }
-
-        public override void Stop()
-        {
-            
         }
     }
 }

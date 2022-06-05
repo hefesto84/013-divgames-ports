@@ -1,6 +1,7 @@
 ﻿using System;
 using Raylib_cs;
 using steroid_port.Game.Services;
+using steroid_port.Game.Services.Game;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Systems.Ship;
@@ -16,7 +17,6 @@ namespace steroid_port.Game.Systems.Game
         private readonly CollisionSystem _collisionSystem;
         private readonly ShipSystem _shipSystem;
         private readonly AsteroidsSystem _asteroidsSystem;
-        private int _currentLives = 0;
 
         public GameSystem(GameService gameService, CollisionSystem collisionSystem, ShipSystem shipSystem, AsteroidsSystem asteroidsSystem)
         {
@@ -42,8 +42,6 @@ namespace steroid_port.Game.Systems.Game
 
         public override void Reset()
         {
-            _currentLives = 3;
-            _gameService.SetLives(3);
             _gameService.CurrentScore = 0;
         }
 
@@ -51,33 +49,30 @@ namespace steroid_port.Game.Systems.Game
         {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_P))
             {
-                _currentLives--;
-                _gameService.SetLives(_currentLives);
+                _gameService.CurrentLives--;
             }
 
-            if (_currentLives == 0)
+            if (_gameService.CurrentLives == 0)
             {
-                _gameService.CurrentScore = 100;
                 OnGameOver?.Invoke();
             }
 
-            if (_asteroidsSystem.Asteroids.Count == 0)
-            {
-                OnGameCleared?.Invoke();
-                _gameService.CurrentLevel++;
-            }
+            if (_asteroidsSystem.Asteroids.Count != 0) return;
+            
+            OnGameCleared?.Invoke();
+            _gameService.CurrentLevel++;
         }
         
         private void OnCollision()
         {
-            _currentLives--;
-            _gameService.SetLives(_currentLives);
+            _gameService.CurrentLives--;
             _shipSystem.Reset();
         }
 
         private void OnAsteroidShot(int asteroidId)
         {
             _asteroidsSystem.Hit(asteroidId);
+            _gameService.CurrentScore += 10;
         }
     }
 }

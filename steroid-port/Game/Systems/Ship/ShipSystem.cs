@@ -2,8 +2,12 @@
 using System.Numerics;
 using Raylib_cs;
 using steroid_port.Game.Services;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Views;
+using steroid_port.Game.Views.Ship;
 
 namespace steroid_port.Game.Systems.Ship
 {
@@ -64,7 +68,7 @@ namespace steroid_port.Game.Systems.Ship
         {
             if (_view != null) return;
             
-            _view = new ShipView(_renderService, _screenService);
+            _view = new ShipView(_renderService);
             _view.Init(_spriteService);
         }
 

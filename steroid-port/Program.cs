@@ -1,5 +1,5 @@
 ﻿using steroid_port.Game;
-using steroid_port.Game.Configurations;
+using steroid_port.Game.Configurations.Steroid;
 
 namespace steroid_port
 {

@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 using Raylib_cs;
-using steroid_port.Game.Configurations;
+using steroid_port.Game.Configurations.Steroid;
 
-namespace steroid_port.Game.Services
+namespace steroid_port.Game.Services.Render
 {
     public class RenderService
     {
@@ -39,6 +39,11 @@ namespace steroid_port.Game.Services
         {
             Raylib.DrawTexturePro(texture, from,to, center,
                 rotation, Color.WHITE);
+        }
+
+        public void RenderText(string text, int x,int y, int fontSize, Color color)
+        {
+            Raylib.DrawText(text,x,y,fontSize,color);
         }
     }
 }

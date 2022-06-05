@@ -1,16 +1,20 @@
 ﻿using System;
 using Raylib_cs;
-using steroid_port.Game.Configurations;
-using steroid_port.Game.Factories;
-using steroid_port.Game.Managers;
-using steroid_port.Game.Services;
+using steroid_port.Game.Configurations.Steroid;
+using steroid_port.Game.Enums;
+using steroid_port.Game.Factories.States;
+using steroid_port.Game.Managers.Game;
+using steroid_port.Game.Services.Collision;
+using steroid_port.Game.Services.Config;
+using steroid_port.Game.Services.Game;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.States;
-using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;
 using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Systems.Game;
-using steroid_port.Game.Systems.Render;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Systems.Shot;
 using steroid_port.Game.Systems.UI;
@@ -26,6 +30,7 @@ namespace steroid_port.Game
         private RenderService _renderService;
         private ScreenService _screenService;
         private SpriteService _spriteService;
+        private CollisionService _collisionService;
         private GameService _gameService;
         private Utilities _utilities;
 
@@ -34,11 +39,9 @@ namespace steroid_port.Game
         private ShotSystem _shotSystem;
         private CollisionSystem _collisionSystem;
         private BackgroundSystem _backgroundSystem;
-        private RenderSystem _renderSystem;
         private GameSystem _gameSystem;
         private UISystem _uiSystem;
-        
-        
+
         public bool IsQuit => Raylib.WindowShouldClose();
 
         private readonly SteroidConfig _steroidConfig;
@@ -81,6 +84,7 @@ namespace steroid_port.Game
             _renderService = new RenderService(_steroidConfig);
             _screenService = new ScreenService();
             _spriteService = new SpriteService(_screenService);
+            _collisionService = new CollisionService();
             _gameService = new GameService();
             
             
@@ -88,6 +92,7 @@ namespace steroid_port.Game
             _screenService.Init(_steroidConfig.Width,_steroidConfig.Height);
             _renderService.Init();
             _spriteService.Init();
+            _collisionService.Init();
             _gameService.Init();
         }
         
@@ -96,9 +101,8 @@ namespace steroid_port.Game
             _shipSystem = new ShipSystem(_screenService, _spriteService, _renderService);
             _asteroidsSystem = new AsteroidsSystem(_screenService, _spriteService, _renderService);
             _shotSystem = new ShotSystem(_screenService, _spriteService, _renderService, _shipSystem);
-            _collisionSystem = new CollisionSystem(_shipSystem, _asteroidsSystem, _shotSystem);
+            _collisionSystem = new CollisionSystem(_collisionService, _shipSystem, _asteroidsSystem, _shotSystem);
             _backgroundSystem = new BackgroundSystem(_spriteService, _renderService);
-            _renderSystem = new RenderSystem();
             _uiSystem = new UISystem(_configService, _screenService, _renderService, _spriteService, _gameService, _utilities);
             _gameSystem = new GameSystem(_gameService, _collisionSystem, _shipSystem, _asteroidsSystem);
         }

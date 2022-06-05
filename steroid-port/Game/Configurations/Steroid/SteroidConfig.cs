@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection.Metadata;
 
-namespace steroid_port.Game.Configurations
+namespace steroid_port.Game.Configurations.Steroid
 {
     public class SteroidConfig
     {

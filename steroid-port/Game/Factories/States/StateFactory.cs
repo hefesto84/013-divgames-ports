@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using steroid_port.Game.Enums;
 using steroid_port.Game.States.Base;
 
-namespace steroid_port.Game.Factories
+namespace steroid_port.Game.Factories.States
 {
     public class StateFactory
     {

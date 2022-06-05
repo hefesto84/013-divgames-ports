@@ -1,7 +1,7 @@
-﻿using steroid_port.Game.Factories;
+﻿using steroid_port.Game.Factories.States;
 using steroid_port.Game.States.Base;
 
-namespace steroid_port.Game.Managers
+namespace steroid_port.Game.Managers.Game
 {
     public class GameManager
     {

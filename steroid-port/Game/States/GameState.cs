@@ -1,4 +1,6 @@
-﻿using steroid_port.Game.Managers;
+﻿using steroid_port.Game.Enums;
+using steroid_port.Game.Managers;
+using steroid_port.Game.Managers.Game;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;

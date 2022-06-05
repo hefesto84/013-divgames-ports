@@ -28,12 +28,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Enums/StateType.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Factories/StateFactory.cs">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Factories/States/StateFactory.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Managers/GameManager.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Services/Collision/CollisionService.cs">
           <value>
             <set />
           </value>
@@ -48,7 +63,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Services/Game/GameService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Services/GameService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Services/Render/RenderService.cs">
           <value>
             <set />
           </value>
@@ -59,6 +84,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Services/ScreenService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Services/Sprite/SpriteService.cs">
           <value>
             <set />
           </value>
@@ -153,7 +183,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/Asteroid/AsteroidView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Views/AsteroidView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/Background/BackgroundView.cs">
           <value>
             <set />
           </value>
@@ -173,12 +213,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/Lives/LivesView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Views/LivesView.cs">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/Ship/ShipView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/steroid-port/Game/Views/ShipView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/steroid-port/Game/Views/Shot/ShotView.cs">
           <value>
             <set />
           </value>

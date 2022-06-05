@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Numerics;
 using Raylib_cs;
-using steroid_port.Game.Services;
+using steroid_port.Game.Services.Game;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Views.Base;
 
-namespace steroid_port.Game.Views
+namespace steroid_port.Game.Views.Lives
 {
     public class LivesView : View
     {
@@ -13,22 +15,14 @@ namespace steroid_port.Game.Views
         private Vector2 _centerOfView = Vector2.Zero;
         private Vector2 _finalSizeOfView = Vector2.Zero;
         private float _initialY = 0;
-        private int _currentLives = 0;
-
         private LifeViewData[] _livesViewData;
         private readonly GameService _gameService;
         
-        public LivesView(RenderService renderService, GameService gameService, ScreenService screenService) : base(renderService, screenService)
+        public LivesView(RenderService renderService, GameService gameService) : base(renderService)
         {
             _gameService = gameService;
-            _gameService.OnLivesUpdated += OnLivesUpdated;
         }
-
-        private void OnLivesUpdated(int lives)
-        {
-            _currentLives = lives;
-        }
-
+        
         public void Init(SpriteService spriteService)
         {
             _textureData = spriteService.Get("ship");
@@ -65,17 +59,11 @@ namespace steroid_port.Game.Views
         {
             _rotation += 1;
             
-            for (var i = 1; i < _currentLives+1; i++)
+            for (var i = 1; i < _gameService.CurrentLives+1; i++)
             {
                 RenderService.Render(_textureData.Item2, _livesViewData[i-1].From, _livesViewData[i-1].To, _livesViewData[i-1].Center, _rotation);
             }
         }
-
-        ~LivesView()
-        {
-            _gameService.OnLivesUpdated -= OnLivesUpdated;
-        }
-        
     }
 
     public struct LifeViewData

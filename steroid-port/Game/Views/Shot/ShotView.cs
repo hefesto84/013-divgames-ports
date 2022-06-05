@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Numerics;
 using Raylib_cs;
-using steroid_port.Game.Services;
+using steroid_port.Game.Services.Render;
+using steroid_port.Game.Services.Screen;
+using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Views.Base;
 
-namespace steroid_port.Game.Views
+namespace steroid_port.Game.Views.Shot
 {
     public class ShotView : View
     {
@@ -19,12 +21,10 @@ namespace steroid_port.Game.Views
         private float _rads;
         private const int ShotSpeed = 8;
         private const int InitialShotSpeed = 10;
-        
-        public Action<ShotView> OnOutOfScreen { get; set; }
-        
+
         public bool IsReady { get; set; }
         
-        public ShotView(RenderService renderService, ScreenService screenService) : base(renderService, screenService)
+        public ShotView(RenderService renderService, ScreenService screenService) : base(renderService)
         {
             _screenService = screenService;
         }
