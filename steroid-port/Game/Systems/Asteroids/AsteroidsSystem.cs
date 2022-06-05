@@ -20,6 +20,7 @@ namespace steroid_port.Game.Systems.Asteroids
         private const int InitialAsteroids = 6;
         private const int AsteroidsDividedNumber = 2;
         private const int AsteroidsSpeedRotation = 2;
+        private const int InitialAsteroidLevel = 3;
 
         private readonly Random _random;
 
@@ -59,8 +60,7 @@ namespace steroid_port.Game.Systems.Asteroids
         {
             for (var i = 0; i < InitialAsteroids; i++)
             {
-                _views.Add(new AsteroidView(_renderService));
-                _views[i].Init(_spriteService, new Vector2(_random.Next(0, (int) _screenService.CurrentSize.X), _random.Next(0, (int) _screenService.CurrentSize.Y)), 3);
+                CreateAndInitView(InitialAsteroidLevel);
             }
         }
 
@@ -81,10 +81,26 @@ namespace steroid_port.Game.Systems.Asteroids
         {
             for (var i = 0; i < AsteroidsDividedNumber; i++)
             {
-                var asteroidView = new AsteroidView(_renderService);
-                asteroidView.Init(_spriteService, new Vector2(_random.Next(0, (int) _screenService.CurrentSize.X), _random.Next(0, (int) _screenService.CurrentSize.Y)), asteroidLevel);
-                _views.Add(asteroidView);
+                CreateAndInitView(asteroidLevel);
             }
+        }
+
+        private Vector2 GetRandomAsteroidVelocity()
+        {
+            return new(_random.Next(-1, 1), _random.Next(-1, 1));
+        }
+
+        private void CreateAndInitView(int asteroidLevel)
+        {
+            var asteroidView = new AsteroidView(_renderService, _screenService);
+            
+            asteroidView.Init(
+                _spriteService, 
+                new Vector2(_random.Next(0, (int) _screenService.CurrentSize.X), _random.Next(0, (int) _screenService.CurrentSize.Y)), 
+                GetRandomAsteroidVelocity(),
+                asteroidLevel);
+            
+            _views.Add(asteroidView);
         }
     }
 }
