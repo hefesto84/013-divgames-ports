@@ -15,15 +15,18 @@ namespace steroid_port.Game.Views.Asteroid
         private Vector2 _asteroidCenter;
         private Vector2 _currentPosition;
         
+        public int Level { get; set; }
+        
         public AsteroidView(RenderService renderService) : base(renderService) { }
         
-        public void Init(SpriteService spriteService, Vector2 position)
+        public void Init(SpriteService spriteService, Vector2 position, int level)
         {
             _currentPosition = position;
-            _textureData = spriteService.Get("asteroid-0");
+            _textureData = spriteService.Get($"asteroid-{level}");
             _destination = new Rectangle(_currentPosition.X, _currentPosition.Y, _textureData.Item1.width, _textureData.Item1.height);
             _asteroidCenter = Vector2.Zero;
 
+            Level = level;
             Bounds = _destination;
         }
         

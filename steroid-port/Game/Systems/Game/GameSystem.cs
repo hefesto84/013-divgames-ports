@@ -75,7 +75,7 @@ namespace steroid_port.Game.Systems.Game
         private void OnAsteroidShot(int asteroidId, int shotId)
         {
             _asteroidsSystem.Hit(asteroidId);
-            _shotSystem.Shots[shotId].Recycle();
+            _shotSystem.Hit(shotId);
             
             _gameService.CurrentScore += 10;
         }

@@ -70,6 +70,11 @@ namespace steroid_port.Game.Systems.Shot
             list.Dispose();
         }
 
+        public void Hit(int shotId)
+        {
+            _currentUsedViews[shotId].Recycle();
+        }
+        
         private void Recycle()
         {
             foreach (var t in _currentUsedViews)
