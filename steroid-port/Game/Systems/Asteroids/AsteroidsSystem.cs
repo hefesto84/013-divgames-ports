@@ -96,7 +96,7 @@ namespace steroid_port.Game.Systems.Asteroids
             
             asteroidView.Init(
                 _spriteService, 
-                new Vector2(_random.Next(0, (int) _screenService.CurrentSize.X), _random.Next(0, (int) _screenService.CurrentSize.Y)), 
+                new Vector2(_random.Next(-100, 0), _random.Next(-100, 0)), 
                 GetRandomAsteroidVelocity(),
                 asteroidLevel);
             
