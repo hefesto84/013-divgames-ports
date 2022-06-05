@@ -34,6 +34,8 @@ namespace steroid_port.Game.Views
             _textureData = spriteService.Get("shot");
             _destination = new Rectangle(0, 0, _textureData.Item1.width, _textureData.Item1.height);
             _shotCenter = Vector2.Zero;
+
+            Bounds = _destination;
         }
 
         public void SetView(Vector2 position, Vector2 velocity, int rotation)
@@ -57,8 +59,10 @@ namespace steroid_port.Game.Views
             _destination.y = _currentPosition.Y;
             _shotCenter.X = _destination.width * 0.5f;
             _shotCenter.Y = _destination.height * 0.5f;
+
+            Bounds = _destination;
             
-            RenderService.Render(_textureData.Item2, _textureData.Item1, _destination, _shotCenter, _rotation);
+            RenderService.Render(_textureData.Item2, _textureData.Item1, Bounds, _shotCenter, _rotation);
             
             CheckIfItsOutOfScreen();
         }

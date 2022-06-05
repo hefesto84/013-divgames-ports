@@ -1,6 +1,7 @@
 ﻿using System;
 using Raylib_cs;
 using steroid_port.Game.Services;
+using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Systems.Ship;
 
@@ -11,22 +12,26 @@ namespace steroid_port.Game.Systems.Game
         public Action OnGameOver { get; set; }
         
         private readonly GameService _gameService;
-        private CollisionSystem _collisionSystem;
-        private ShipSystem _shipSystem;
+        private readonly CollisionSystem _collisionSystem;
+        private readonly ShipSystem _shipSystem;
+        private readonly AsteroidsSystem _asteroidsSystem;
         private int _currentLives = 0;
 
-        public GameSystem(GameService gameService, CollisionSystem collisionSystem, ShipSystem shipSystem)
+        public GameSystem(GameService gameService, CollisionSystem collisionSystem, ShipSystem shipSystem, AsteroidsSystem asteroidsSystem)
         {
             _gameService = gameService;
             _collisionSystem = collisionSystem;
             _shipSystem = shipSystem;
+            _asteroidsSystem = asteroidsSystem;
 
             _collisionSystem.OnCollision += OnCollision;
+            _collisionSystem.OnAsteroidShot += OnAsteroidShot;
         }
         
         ~GameSystem()
         {
             _collisionSystem.OnCollision -= OnCollision;
+            _collisionSystem.OnAsteroidShot -= OnAsteroidShot;
         }
 
         public override void Init()
@@ -61,6 +66,11 @@ namespace steroid_port.Game.Systems.Game
             _currentLives--;
             _gameService.SetLives(_currentLives);
             _shipSystem.Reset();
+        }
+
+        private void OnAsteroidShot(int asteroidId)
+        {
+            _asteroidsSystem.Hit(asteroidId);
         }
     }
 }

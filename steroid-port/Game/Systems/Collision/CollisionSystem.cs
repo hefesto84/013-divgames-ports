@@ -13,6 +13,7 @@ namespace steroid_port.Game.Systems.Collision
         private readonly ShotSystem _shotSystem;
         
         public Action OnCollision { get; set; }
+        public Action<int> OnAsteroidShot { get; set; }
         
         public CollisionSystem(ShipSystem shipSystem, AsteroidsSystem asteroidsSystem, ShotSystem shotSystem)
         {
@@ -22,9 +23,9 @@ namespace steroid_port.Game.Systems.Collision
         }
  
         public override void Update()
-        {
-            //Console.WriteLine($"Checking collisions between ship {_shipSystem.Ship} and {_shotSystem.Shots.Count} shots and {_asteroidsSystem.Asteroids.Count} asteroids.");
+        { 
             CheckShipAsteroidCollision();
+            CheckShotAsteroidCollision();
         }
 
         private void CheckShipAsteroidCollision()
@@ -38,6 +39,25 @@ namespace steroid_port.Game.Systems.Collision
                 {
                     OnCollision?.Invoke();
                 }    
+            }
+        }
+
+        private void CheckShotAsteroidCollision()
+        {
+            var shots = _shotSystem.Shots;
+            var asteroids = _asteroidsSystem.Asteroids;
+
+            for (var i = 0; i < shots.Count; i++)
+            {
+                var shotBounds = shots[i].Bounds;
+                
+                for (var j = 0; j < asteroids.Count; j++)
+                {
+                    if (Raylib.CheckCollisionRecs(shotBounds, asteroids[j].Bounds))
+                    {
+                        OnAsteroidShot?.Invoke(j);
+                    }    
+                }
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using steroid_port.Game.Managers;
+﻿using steroid_port.Game.Managers;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;
@@ -28,7 +27,9 @@ namespace steroid_port.Game.States
             AsteroidsSystem asteroidsSystem, 
             ShotSystem shotSystem,
             CollisionSystem collisionSystem,
-            UISystem uiSystem, GameSystem gameSystem, StateType stateType) : base(gameManager, stateType)
+            UISystem uiSystem, 
+            GameSystem gameSystem, 
+            StateType stateType) : base(gameManager, stateType)
         {
             _backgroundSystem = backgroundSystem;
             _shipSystem = shipSystem;
