@@ -89,7 +89,6 @@ namespace steroid_port.Game.Systems.Shot
             {
                 var v = _views.Dequeue();
                 v.SetView(_shipSystem.CurrentPosition, _shipSystem.CurrentVelocity, _shipSystem.CurrentRotation);
-                v.OnOutOfScreen = OnShotReadyToBeUsed;
                 _currentUsedViews.Add(v);
             }
         }
@@ -102,11 +101,6 @@ namespace steroid_port.Game.Systems.Shot
                 view.Init(_spriteService);
                 _views.Enqueue(view);
             }
-        }
-
-        public void OnShotReadyToBeUsed(ShotView shotView)
-        {
-            //_toRecycle.Add(shotView);
         }
     }
 }

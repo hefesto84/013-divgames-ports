@@ -9,6 +9,7 @@ namespace steroid_port.Game.States.Base
         InitGameState,
         GameState,
         GameOverState,
+        ClearedState
     }
     
     public abstract class State

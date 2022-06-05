@@ -10,6 +10,7 @@ namespace steroid_port.Game.Systems.Game
     public class GameSystem : Base.System
     {
         public Action OnGameOver { get; set; }
+        public Action OnGameCleared { get; set; }
         
         private readonly GameService _gameService;
         private readonly CollisionSystem _collisionSystem;
@@ -58,6 +59,12 @@ namespace steroid_port.Game.Systems.Game
             {
                 _gameService.CurrentScore = 100;
                 OnGameOver?.Invoke();
+            }
+
+            if (_asteroidsSystem.Asteroids.Count == 0)
+            {
+                OnGameCleared?.Invoke();
+                _gameService.CurrentLevel++;
             }
         }
         

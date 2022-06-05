@@ -30,14 +30,15 @@ namespace steroid_port.Game.Systems.UI
         }
         public override void Init()
         {
-            _textSizes = new int[5];
-            _texts = new string[5];
+            _textSizes = new int[6];
+            _texts = new string[6];
             
             _texts[0] = _configService.Config.Texts["GAME_TITLE_1_KEY"];
             _texts[1] = _configService.Config.Texts["GAME_TITLE_2_KEY"];
             _texts[2] = _configService.Config.Texts["GAME_PRESS_PLAY_KEY"];
             _texts[3] = _configService.Config.Texts["HELP_KEY"];
-            _texts[4] = $"Score: {_gameService.CurrentScore}";
+            _texts[4] = $"GameOver\n Score: {_gameService.CurrentScore}";
+            _texts[5] = $"Level {_gameService.CurrentLevel} Cleared\n Score: {_gameService.CurrentScore}";
 
             for (var i = 0; i < _texts.Length; i++)
             {
@@ -52,6 +53,7 @@ namespace steroid_port.Game.Systems.UI
             DrawTexts();
             DrawLives();
             DrawScore();
+            DrawLevelCleared();
         }
 
         private void SetupLivesView()
@@ -84,6 +86,13 @@ namespace steroid_port.Game.Systems.UI
             if (CurrentState.StateType != StateType.GameOverState) return;
             
             Raylib.DrawText(_texts[4], (int)_screenService.CurrentSize.X/2 - _textSizes[4]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
+        }
+
+        private void DrawLevelCleared()
+        {
+            if (CurrentState.StateType != StateType.ClearedState) return;
+            
+            Raylib.DrawText(_texts[5], (int)_screenService.CurrentSize.X/2 - _textSizes[5]/2, (int)_screenService.CurrentSize.Y / 2 - 8, 16, Color.YELLOW);
         }
     }
 }

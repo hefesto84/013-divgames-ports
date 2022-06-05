@@ -51,6 +51,7 @@ namespace steroid_port.Game.States
             _gameSystem.Init();
             
             _gameSystem.OnGameOver += OnGameOver;
+            _gameSystem.OnGameCleared += OnGameCleared;
             
             _uiSystem.SetState(this);
         }
@@ -72,11 +73,17 @@ namespace steroid_port.Game.States
         public override void Stop()
         {
             _gameSystem.OnGameOver -= OnGameOver;
+            _gameSystem.OnGameCleared -= OnGameCleared;
         }
         
         private void OnGameOver()
         {
             GameManager.SetState(GameManager.StateFactory.Get(StateType.GameOverState));
+        }
+
+        private void OnGameCleared()
+        {
+            GameManager.SetState(GameManager.StateFactory.Get(StateType.ClearedState));
         }
     }
 }
