@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Raylib_cs;
 using steroid_port.Game.Services;
 using steroid_port.Game.Views;
 
@@ -18,6 +19,8 @@ namespace steroid_port.Game.Systems.Asteroids
         private int _initialAsteroids = 6;
 
         private readonly Random _random;
+
+        public List<AsteroidView> Asteroids => _views;
 
         public AsteroidsSystem(ScreenService screenService, SpriteService spriteService, RenderService renderService)
         {

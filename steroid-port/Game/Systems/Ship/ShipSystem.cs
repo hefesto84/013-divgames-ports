@@ -23,6 +23,8 @@ namespace steroid_port.Game.Systems.Ship
         public int CurrentRotation => _rotation;
         public Vector2 CurrentVelocity => _velocity;
 
+        public ShipView Ship => _view;
+        
         public ShipSystem(ScreenService screenService, SpriteService  spriteService, RenderService renderService)
         {
             _screenService = screenService;

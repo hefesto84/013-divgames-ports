@@ -30,7 +30,7 @@ namespace steroid_port.Game.Systems.Collision
 
         public override void Update()
         {
-            Console.WriteLine("Checking collisions");
+            Console.WriteLine($"Checking collisions between ship {_shipSystem.Ship} and {_shotSystem.Shots.Count} shots and {_asteroidsSystem.Asteroids.Count} asteroids.");
         }
     }
 }

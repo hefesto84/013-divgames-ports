@@ -19,6 +19,8 @@ namespace steroid_port.Game.Systems.Shot
         private List<ShotView> _toRecycle;
 
         private int _maxShots = 10;
+
+        public List<ShotView> Shots => _currentUsedViews;
         
         public ShotSystem(ScreenService screenService, SpriteService spriteService, RenderService renderService, ShipSystem shipSystem)
         {
