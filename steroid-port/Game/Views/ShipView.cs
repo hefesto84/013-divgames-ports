@@ -23,6 +23,8 @@ namespace steroid_port.Game.Views
             _textureData = spriteService.Get("ship");
             _destination = new Rectangle(0, 0, _textureData.Item1.width, _textureData.Item1.height);
             _shipCenter = Vector2.Zero;
+            
+            Bounds = _destination;
         }
         
         public void UpdateView(Vector2 position, int rotation)
@@ -32,7 +34,9 @@ namespace steroid_port.Game.Views
             _shipCenter.X = _destination.width * 0.5f;
             _shipCenter.Y = _destination.height * 0.5f;
             
-            RenderService.Render(_textureData.Item2, _textureData.Item1, _destination, _shipCenter, rotation);
+            Bounds = _destination;
+            
+            RenderService.Render(_textureData.Item2, _textureData.Item1, Bounds, _shipCenter, rotation);
         }
     }
 }
