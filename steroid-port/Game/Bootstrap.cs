@@ -104,7 +104,7 @@ namespace steroid_port.Game
             _collisionSystem = new CollisionSystem(_collisionService, _shipSystem, _asteroidsSystem, _shotSystem);
             _backgroundSystem = new BackgroundSystem(_spriteService, _renderService);
             _uiSystem = new UISystem(_configService, _screenService, _renderService, _spriteService, _gameService, _utilities);
-            _gameSystem = new GameSystem(_gameService, _collisionSystem, _shipSystem, _asteroidsSystem);
+            _gameSystem = new GameSystem(_gameService, _collisionSystem, _shipSystem, _asteroidsSystem, _shotSystem);
         }
         
         private void InitFactories()

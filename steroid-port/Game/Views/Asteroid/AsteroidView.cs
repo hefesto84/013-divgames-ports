@@ -29,6 +29,9 @@ namespace steroid_port.Game.Views.Asteroid
         
         public void UpdateView(int rotation)
         {
+            //_currentPosition.X += 2;
+            //_currentPosition.Y += 2;
+            
             _destination.x = _currentPosition.X;
             _destination.y = _currentPosition.Y;
             _asteroidCenter.X = _destination.width * 0.5f;

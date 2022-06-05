@@ -5,6 +5,7 @@ using steroid_port.Game.Services.Game;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Collision;
 using steroid_port.Game.Systems.Ship;
+using steroid_port.Game.Systems.Shot;
 
 namespace steroid_port.Game.Systems.Game
 {
@@ -17,13 +18,15 @@ namespace steroid_port.Game.Systems.Game
         private readonly CollisionSystem _collisionSystem;
         private readonly ShipSystem _shipSystem;
         private readonly AsteroidsSystem _asteroidsSystem;
+        private readonly ShotSystem _shotSystem;
 
-        public GameSystem(GameService gameService, CollisionSystem collisionSystem, ShipSystem shipSystem, AsteroidsSystem asteroidsSystem)
+        public GameSystem(GameService gameService, CollisionSystem collisionSystem, ShipSystem shipSystem, AsteroidsSystem asteroidsSystem, ShotSystem shotSystem)
         {
             _gameService = gameService;
             _collisionSystem = collisionSystem;
             _shipSystem = shipSystem;
             _asteroidsSystem = asteroidsSystem;
+            _shotSystem = shotSystem;
 
             _collisionSystem.OnCollision += OnCollision;
             _collisionSystem.OnAsteroidShot += OnAsteroidShot;
@@ -69,9 +72,11 @@ namespace steroid_port.Game.Systems.Game
             _shipSystem.Reset();
         }
 
-        private void OnAsteroidShot(int asteroidId)
+        private void OnAsteroidShot(int asteroidId, int shotId)
         {
             _asteroidsSystem.Hit(asteroidId);
+            _shotSystem.Shots[shotId].Recycle();
+            
             _gameService.CurrentScore += 10;
         }
     }

@@ -58,7 +58,7 @@ namespace steroid_port.Game.Services.Sprite
             
             for (var i = 0; i < 499; i++)
             {
-                Raylib.ImageDrawPixel(ref background, r.Next(0,width-1), r.Next(0,height-1), Color.WHITE);    
+                Raylib.ImageDrawPixel(ref background, r.Next(0,width-1), r.Next(0,height-1), Color.DARKGRAY);    
             }
             
             _backgroundTexture = Raylib.LoadTextureFromImage(background);

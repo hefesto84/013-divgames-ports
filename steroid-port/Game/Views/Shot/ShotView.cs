@@ -67,6 +67,11 @@ namespace steroid_port.Game.Views.Shot
             CheckIfItsOutOfScreen();
         }
 
+        public void Recycle()
+        {
+            IsReady = true;
+        }
+        
         private void CheckIfItsOutOfScreen()
         {
             if (_currentPosition.X > _screenService.CurrentSize.X ||

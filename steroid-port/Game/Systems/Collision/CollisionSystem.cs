@@ -18,7 +18,7 @@ namespace steroid_port.Game.Systems.Collision
         private readonly ShotSystem _shotSystem;
         
         public Action OnCollision { get; set; }
-        public Action<int> OnAsteroidShot { get; set; }
+        public Action<int, int> OnAsteroidShot { get; set; }
         
         private List<ShotView> _shots;
         private List<AsteroidView> _asteroids;
@@ -76,7 +76,7 @@ namespace steroid_port.Game.Systems.Collision
                 {
                     if (_collisionService.AreRectsColliding(shotBounds, _asteroids[j].Bounds))
                     {
-                        OnAsteroidShot?.Invoke(j);
+                        OnAsteroidShot?.Invoke(j,i);
                     }    
                 }
             }
