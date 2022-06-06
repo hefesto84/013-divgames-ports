@@ -68,17 +68,8 @@ namespace steroid_port.Game.Systems.Asteroids
             
             _asteroidInitialPositions.Clear();
             
-            /*
-            _asteroidInitialPositions = new List<Vector2>
-            {
-                new Vector2(_random.Next(-50, 0), _random.Next(-50, 0)),
-                new Vector2(_random.Next(_screenService.CurrentSize))
-            };
-            */
-            
             _asteroidInitialPositions.Add(new Vector2(_random.Next(-50, 0), _random.Next(-50, 0)));
             _asteroidInitialPositions.Add(new Vector2(_random.Next(-50, 0), _random.Next((int)_screenService.CurrentSize.Y, (int)_screenService.CurrentSize.Y + 50)));
-            //_asteroidInitialPositions.Add(new Vector2(_random.Next()));
         }
 
         private void SetupAsteroidView()
