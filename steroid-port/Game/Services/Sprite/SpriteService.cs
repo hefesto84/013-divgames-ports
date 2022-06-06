@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using common.Core.Services.Screen;
 using Raylib_cs;
-using steroid_port.Game.Services.Screen;
 
 namespace steroid_port.Game.Services.Sprite
 {

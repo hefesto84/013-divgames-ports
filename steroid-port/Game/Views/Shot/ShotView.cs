@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Numerics;
+using common.Core.Services.Render;
+using common.Core.Services.Screen;
+using common.Core.Views.Base;
 using Raylib_cs;
-using steroid_port.Game.Services.Render;
-using steroid_port.Game.Services.Screen;
 using steroid_port.Game.Services.Sprite;
-using steroid_port.Game.Views.Base;
 
 namespace steroid_port.Game.Views.Shot
 {

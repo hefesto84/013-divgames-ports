@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "steroid-port", "steroid-port\steroid-port.csproj", "{4CAF4F17-2011-4A59-B4CB-0595521D3960}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pacman-port", "pacman-port\pacman-port.csproj", "{1A54B5A1-D79A-4B97-8DD6-B4733A1CC416}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "common\common.csproj", "{5591B058-1488-44FD-9207-2F1438DA901A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{4CAF4F17-2011-4A59-B4CB-0595521D3960}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CAF4F17-2011-4A59-B4CB-0595521D3960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CAF4F17-2011-4A59-B4CB-0595521D3960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A54B5A1-D79A-4B97-8DD6-B4733A1CC416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A54B5A1-D79A-4B97-8DD6-B4733A1CC416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A54B5A1-D79A-4B97-8DD6-B4733A1CC416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A54B5A1-D79A-4B97-8DD6-B4733A1CC416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5591B058-1488-44FD-9207-2F1438DA901A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5591B058-1488-44FD-9207-2F1438DA901A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5591B058-1488-44FD-9207-2F1438DA901A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5591B058-1488-44FD-9207-2F1438DA901A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -8,7 +8,7 @@ namespace steroid_port
         public static string AppName = "DivGames Steroid port - Raylib 4.0.0";
         static void Main(string[] args)
         {
-            var config = new SteroidConfig();
+            var config = new SteroidConfig("Resources/properties.ini");
             
             var bootstrap = new Bootstrap(config);
             

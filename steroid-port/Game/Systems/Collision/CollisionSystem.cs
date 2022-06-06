@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using steroid_port.Game.Services.Collision;
+using common.Core.Services.Collision;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Systems.Shot;
@@ -10,7 +10,7 @@ using steroid_port.Game.Views.Shot;
 
 namespace steroid_port.Game.Systems.Collision
 {
-    public class CollisionSystem : Base.System
+    public class CollisionSystem : common.Core.Systems.Base.System
     {
         private readonly CollisionService _collisionService;
         private readonly ShipSystem _shipSystem;

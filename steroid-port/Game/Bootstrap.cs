@@ -1,16 +1,20 @@
 ﻿using System;
+using common.Core.Factories.States;
+using common.Core.Managers.Game;
+using common.Core.Services.Collision;
+using common.Core.Services.Render;
+using common.Core.Services.Screen;
+using common.Core.Utils;
 using Raylib_cs;
 using steroid_port.Game.Configurations.Steroid;
-using steroid_port.Game.Enums;
-using steroid_port.Game.Factories.States;
-using steroid_port.Game.Managers.Game;
-using steroid_port.Game.Services.Collision;
 using steroid_port.Game.Services.Config;
 using steroid_port.Game.Services.Game;
-using steroid_port.Game.Services.Render;
-using steroid_port.Game.Services.Screen;
 using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.States;
+using steroid_port.Game.States.Cleared;
+using steroid_port.Game.States.Game;
+using steroid_port.Game.States.GameOver;
+using steroid_port.Game.States.InitGame;
 using steroid_port.Game.Systems.Asteroids;
 using steroid_port.Game.Systems.Background;
 using steroid_port.Game.Systems.Collision;
@@ -18,7 +22,6 @@ using steroid_port.Game.Systems.Game;
 using steroid_port.Game.Systems.Ship;
 using steroid_port.Game.Systems.Shot;
 using steroid_port.Game.Systems.UI;
-using steroid_port.Game.Utils;
 
 namespace steroid_port.Game
 {
@@ -61,7 +64,7 @@ namespace steroid_port.Game
             InitFactories();
             
             _gameManager.Init(_stateFactory);
-            _gameManager.SetState(_stateFactory.Get(StateType.InitGameState));
+            _gameManager.SetState(_stateFactory.Get(typeof(InitGameState)));
         }
         
         public void Update()
@@ -111,10 +114,10 @@ namespace steroid_port.Game
         {
             _stateFactory = new StateFactory();
             _stateFactory.Init();
-            _stateFactory.RegisterState(new InitGameState(_gameManager, _uiSystem, _gameSystem, _backgroundSystem, StateType.InitGameState));
-            _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _asteroidsSystem, _shotSystem, _collisionSystem, _uiSystem, _gameSystem, StateType.GameState));
-            _stateFactory.RegisterState(new GameOverState(_gameManager, _backgroundSystem, _uiSystem, StateType.GameOverState));
-            _stateFactory.RegisterState(new ClearedState(_gameManager,_backgroundSystem,_uiSystem, StateType.ClearedState));
+            _stateFactory.RegisterState(new InitGameState(_gameManager, _uiSystem, _gameSystem, _backgroundSystem));
+            _stateFactory.RegisterState(new GameState(_gameManager, _backgroundSystem, _shipSystem, _asteroidsSystem, _shotSystem, _collisionSystem, _uiSystem, _gameSystem));
+            _stateFactory.RegisterState(new GameOverState(_gameManager, _backgroundSystem, _uiSystem));
+            _stateFactory.RegisterState(new ClearedState(_gameManager,_backgroundSystem,_uiSystem));
         }
 
         ~Bootstrap()

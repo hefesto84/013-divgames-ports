@@ -1,16 +1,20 @@
-﻿using Raylib_cs;
-using steroid_port.Game.Enums;
+﻿using common.Core.Services.Render;
+using common.Core.Services.Screen;
+using common.Core.Utils;
+using Raylib_cs;
 using steroid_port.Game.Services.Config;
 using steroid_port.Game.Services.Game;
-using steroid_port.Game.Services.Render;
-using steroid_port.Game.Services.Screen;
 using steroid_port.Game.Services.Sprite;
-using steroid_port.Game.Utils;
+using steroid_port.Game.States;
+using steroid_port.Game.States.Cleared;
+using steroid_port.Game.States.Game;
+using steroid_port.Game.States.GameOver;
+using steroid_port.Game.States.InitGame;
 using steroid_port.Game.Views.Lives;
 
 namespace steroid_port.Game.Systems.UI
 {
-    public class UISystem : Base.System
+    public class UISystem : common.Core.Systems.Base.System
     {
         private readonly ConfigService _configService;
         private readonly ScreenService _screenService;
@@ -69,7 +73,7 @@ namespace steroid_port.Game.Systems.UI
         
         private void DrawTexts()
         {
-            if (CurrentState.StateType != StateType.InitGameState) return;
+            if (CurrentState.StateType.Type != typeof(InitGameState)) return;
             
             _renderService.RenderText(_texts[0], (int)_screenService.CurrentSize.X/2 - _textSizes[0]/2, 0, 16, Color.YELLOW);
             _renderService.RenderText(_texts[1], (int)_screenService.CurrentSize.X/2 - _textSizes[1]/2, 20, 16, Color.YELLOW);
@@ -80,20 +84,20 @@ namespace steroid_port.Game.Systems.UI
 
         private void DrawLives()
         {
-            if (CurrentState.StateType != StateType.GameState) return;
+            if (CurrentState.StateType.Type != typeof(GameState)) return;
             _livesView.UpdateView();
         }
 
         private void DrawScore()
         {
-            if (CurrentState.StateType != StateType.GameOverState) return;
+            if (CurrentState.StateType.Type != typeof(GameOverState)) return;
             
             _renderService.RenderText(_texts[4], (int)_screenService.CurrentSize.X/2 - _textSizes[4]/2, (int)_screenService.CurrentSize.Y /2 - 8, 16, Color.YELLOW);
         }
 
         private void DrawLevelCleared()
         {
-            if (CurrentState.StateType != StateType.ClearedState) return;
+            if (CurrentState.StateType.Type != typeof(ClearedState)) return;
             
             _renderService.RenderText(_texts[5], (int)_screenService.CurrentSize.X/2 - _textSizes[5]/2, (int)_screenService.CurrentSize.Y / 2 - 8, 16, Color.YELLOW);
         }

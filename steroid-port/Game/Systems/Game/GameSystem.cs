@@ -8,7 +8,7 @@ using steroid_port.Game.Systems.Shot;
 
 namespace steroid_port.Game.Systems.Game
 {
-    public class GameSystem : Base.System
+    public class GameSystem : common.Core.Systems.Base.System
     {
         public Action OnGameOver { get; set; }
         public Action OnGameCleared { get; set; }
@@ -44,7 +44,6 @@ namespace steroid_port.Game.Systems.Game
 
         public override void Reset()
         {
-            //_gameService.CurrentScore = 0;
             _gameService.Reset();
         }
 

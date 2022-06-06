@@ -1,10 +1,10 @@
-﻿using steroid_port.Game.Services.Render;
+﻿using common.Core.Services.Render;
 using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Views.Background;
 
 namespace steroid_port.Game.Systems.Background
 {
-    public class BackgroundSystem : Base.System
+    public class BackgroundSystem : common.Core.Systems.Base.System
     {
         private readonly SpriteService _spriteService;
         private readonly RenderService _renderService;

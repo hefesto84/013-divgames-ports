@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using steroid_port.Game.Services.Render;
-using steroid_port.Game.Services.Screen;
+using common.Core.Services.Render;
+using common.Core.Services.Screen;
 using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Views.Asteroid;
 
 namespace steroid_port.Game.Systems.Asteroids
 {
-    public class AsteroidsSystem : Base.System
+    public class AsteroidsSystem : common.Core.Systems.Base.System
     {
         private readonly ScreenService _screenService;
         private readonly SpriteService _spriteService;
@@ -34,8 +34,6 @@ namespace steroid_port.Game.Systems.Asteroids
             _spriteService = spriteService;
             _renderService = renderService;
             _random = new Random();
-            
-            
         }
 
         public override void Init()
