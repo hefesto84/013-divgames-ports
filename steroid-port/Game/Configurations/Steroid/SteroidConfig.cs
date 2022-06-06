@@ -15,7 +15,7 @@ namespace steroid_port.Game.Configurations.Steroid
 
         public SteroidConfig()
         {
-            var properties = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "properties.ini"));
+            var properties = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "Resources/properties.ini"));
             Name = properties[0];
             Width = Int32.Parse(properties[1]);
             Height = Int32.Parse(properties[2]);

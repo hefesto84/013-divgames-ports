@@ -28,7 +28,7 @@ namespace steroid_port.Game.Services.Sprite
         
         public void Init()
         {
-            _mainTexture = Raylib.LoadTexture(Directory.GetCurrentDirectory()+"/steroid.png");
+            _mainTexture = Raylib.LoadTexture(Directory.GetCurrentDirectory()+"/Resources/steroid.png");
             
             _spriteData = new Dictionary<string, Rectangle>();
             _spriteData.Add("ship",new Rectangle(0,0,33,21));
