@@ -17,7 +17,7 @@
             Reset();
         }
 
-        private void Reset()
+        public void Reset()
         {
             CurrentLives = MaxLives;
             CurrentScore = 0;

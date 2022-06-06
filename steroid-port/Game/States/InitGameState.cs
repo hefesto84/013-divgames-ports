@@ -6,6 +6,7 @@ using steroid_port.Game.Managers.Game;
 using steroid_port.Game.Services;
 using steroid_port.Game.States.Base;
 using steroid_port.Game.Systems.Background;
+using steroid_port.Game.Systems.Game;
 using steroid_port.Game.Systems.UI;
 using steroid_port.Game.Utils;
 
@@ -15,11 +16,13 @@ namespace steroid_port.Game.States
     {
         private readonly BackgroundSystem _backgroundSystem;
         private readonly UISystem _uiSystem;
+        private readonly GameSystem _gameSystem;
         
 
-        public InitGameState(GameManager gameManager, UISystem uiSystem , BackgroundSystem backgroundSystem, StateType stateType) : base(gameManager, stateType)
+        public InitGameState(GameManager gameManager, UISystem uiSystem , GameSystem gameSystem, BackgroundSystem backgroundSystem, StateType stateType) : base(gameManager, stateType)
         {
             _uiSystem = uiSystem;
+            _gameSystem = gameSystem;
             _backgroundSystem = backgroundSystem;
         }
 
@@ -27,6 +30,7 @@ namespace steroid_port.Game.States
         {
             _uiSystem.Init();
             _backgroundSystem.Init();
+            _gameSystem.Init();
             
             _uiSystem.SetState(this);
         }

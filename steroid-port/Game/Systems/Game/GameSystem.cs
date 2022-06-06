@@ -45,6 +45,7 @@ namespace steroid_port.Game.Systems.Game
         public override void Reset()
         {
             _gameService.CurrentScore = 0;
+            _gameService.Reset();
         }
 
         public override void Update()
@@ -68,6 +69,13 @@ namespace steroid_port.Game.Systems.Game
         private void OnCollision()
         {
             _gameService.CurrentLives--;
+            
+            if (_gameService.CurrentLives == 0)
+            {
+                OnGameOver?.Invoke();
+                return;
+            }
+            
             _shipSystem.Reset();
         }
 
