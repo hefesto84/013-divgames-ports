@@ -28,6 +28,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/common/Core/BaseBootstrap.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/Core/Bootstrap/BaseBootstrap.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/common/Core/Configurations/Base/Config.cs">
           <value>
             <set />
@@ -48,12 +58,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/common/Core/Services/Config/ConfigService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/common/Core/Services/Render/RenderService.cs">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/common/Core/Services/Screen/ScreenService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/Core/Services/Sprite/SpriteService.cs">
           <value>
             <set />
           </value>
@@ -94,6 +114,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/common/Game/States/Base/StateType.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Bootstrap.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Configurations/PacmanConfig.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/InitGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Program.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Resources/properties.ini">
           <value>
             <set />
           </value>

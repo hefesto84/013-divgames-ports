@@ -1,4 +1,5 @@
-﻿using common.Core.Services.Render;
+﻿using common.Core.Configurations.Base;
+using common.Core.Services.Render;
 using Raylib_cs;
 
 namespace common.Core.Views.Base

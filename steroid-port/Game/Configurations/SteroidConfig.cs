@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using common.Core.Configurations.Base;
 
-namespace steroid_port.Game.Configurations.Steroid
+namespace steroid_port.Game.Configurations
 {
     // @TODO: we need to refactor this for the texts :)
     public class SteroidConfig : Config

@@ -6,17 +6,17 @@ namespace common.Core.Services.Render
 {
     public class RenderService
     {
-        private readonly Config _config;
-        
-        public RenderService(Config steroidConfig)
+        private Configurations.Base.Config _config;
+ 
+        public void Init<T>(T config)
         {
-            _config = steroidConfig;
-        }
+            _config = config as Configurations.Base.Config;
 
-        public void Init()
-        {
-            Raylib.InitWindow(_config.Width,_config.Height,_config.Name);
-            Raylib.SetTargetFPS(_config.Fps);
+            if (_config != null)
+            {
+                Raylib.InitWindow(_config.Width, _config.Height, _config.Name);
+                Raylib.SetTargetFPS(_config.Fps);
+            }
         }
 
         public void Begin()

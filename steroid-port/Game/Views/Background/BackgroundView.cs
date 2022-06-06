@@ -3,6 +3,7 @@ using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Views.Base;
 using Raylib_cs;
+using steroid_port.Game.Configurations;
 using steroid_port.Game.Services.Sprite;
 
 namespace steroid_port.Game.Views.Background

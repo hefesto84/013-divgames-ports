@@ -25,7 +25,7 @@ namespace steroid_port.Game.Services.Sprite
             if (!isSpriteRegistered) throw new Exception($"Sprite with id: {id} not registered.");
             return new Tuple<Rectangle, Texture2D>(rect,_textureData[id]);
         }
-        
+
         public void Init()
         {
             _mainTexture = Raylib.LoadTexture(Directory.GetCurrentDirectory()+"/Resources/steroid.png");

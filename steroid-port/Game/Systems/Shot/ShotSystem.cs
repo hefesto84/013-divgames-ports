@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using Raylib_cs;
+using steroid_port.Game.Configurations;
 using steroid_port.Game.Services;
 using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.Systems.Ship;

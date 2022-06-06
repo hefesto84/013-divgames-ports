@@ -35,6 +35,7 @@ namespace steroid_port.Game.Systems.Collision
             
             _shots = new List<ShotView>();
             _asteroids = new List<AsteroidView>();
+            
         }
  
         public override void Update()

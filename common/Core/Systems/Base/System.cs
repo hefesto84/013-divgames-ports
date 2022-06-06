@@ -1,4 +1,6 @@
-﻿using common.Core.Factories.States;
+﻿using common.Core.Bootstrap;
+using common.Core.Configurations.Base;
+using common.Core.Factories.States;
 using common.Core.States.Base;
 
 namespace common.Core.Systems.Base
@@ -8,7 +10,7 @@ namespace common.Core.Systems.Base
         protected State CurrentState;
         
         public StateFactory StateFactory;
-        
+  
         public virtual void Init(){}
         public virtual void Update(){}
         public virtual void Reset(){}

@@ -1,8 +1,9 @@
-﻿using common.Core.Services.Render;
+﻿using common.Core.Services.Config;
+using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using common.Core.Utils;
 using Raylib_cs;
-using steroid_port.Game.Services.Config;
+using steroid_port.Game.Configurations;
 using steroid_port.Game.Services.Game;
 using steroid_port.Game.Services.Sprite;
 using steroid_port.Game.States;
@@ -16,7 +17,7 @@ namespace steroid_port.Game.Systems.UI
 {
     public class UISystem : common.Core.Systems.Base.System
     {
-        private readonly ConfigService _configService;
+        private readonly ConfigService<SteroidConfig> _configService;
         private readonly ScreenService _screenService;
         private readonly Utilities _utilities;
         private readonly RenderService _renderService;
@@ -26,7 +27,7 @@ namespace steroid_port.Game.Systems.UI
         private string[] _texts;
         private LivesView _livesView;
         
-        public UISystem(ConfigService configService, ScreenService screenService,  RenderService renderService, SpriteService spriteService, GameService gameService, Utilities utilities)
+        public UISystem(ConfigService<SteroidConfig> configService, ScreenService screenService,  RenderService renderService, SpriteService spriteService, GameService gameService, Utilities utilities)
         {
             _screenService = screenService;
             _configService = configService;
