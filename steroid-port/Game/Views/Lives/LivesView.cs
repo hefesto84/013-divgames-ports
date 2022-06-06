@@ -38,10 +38,10 @@ namespace steroid_port.Game.Views.Lives
         {
             _livesViewData = new LifeViewData[_gameService.MaxLives];
             
-            _finalSizeOfView.X = _textureData.Item1.width / 2;
-            _finalSizeOfView.Y = _textureData.Item1.height / 2;
-            _centerOfView.X = _finalSizeOfView.X/2;
-            _centerOfView.Y = _finalSizeOfView.Y/2;
+            _finalSizeOfView.X = _textureData.Item1.width / 1.5f;
+            _finalSizeOfView.Y = _textureData.Item1.height / 1.5f;
+            _centerOfView.X = _finalSizeOfView.X/1.5f;
+            _centerOfView.Y = _finalSizeOfView.Y/1.5f;
             _initialY = _finalSizeOfView.Y*1.5f;
 
             for (var i = 0; i < _gameService.MaxLives; i++)
@@ -50,7 +50,7 @@ namespace steroid_port.Game.Views.Lives
                 {
                     Center = _centerOfView,
                     From = _textureData.Item1,
-                    To = new Rectangle(i*_textureData.Item1.width - 5*i, _initialY, _finalSizeOfView.X, _finalSizeOfView.Y)
+                    To = new Rectangle((i+1)*_textureData.Item1.width, _initialY, _finalSizeOfView.X, _finalSizeOfView.Y)
                 };
             }
         }

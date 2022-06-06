@@ -44,7 +44,7 @@ namespace steroid_port.Game.Systems.Game
 
         public override void Reset()
         {
-            _gameService.CurrentScore = 0;
+            //_gameService.CurrentScore = 0;
             _gameService.Reset();
         }
 

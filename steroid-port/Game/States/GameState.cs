@@ -80,9 +80,7 @@ namespace steroid_port.Game.States
         
         private void OnGameOver()
         {
-            _gameSystem.Reset();
             GameManager.SetState(GameManager.StateFactory.Get(StateType.GameOverState));
-            
         }
 
         private void OnGameCleared()
