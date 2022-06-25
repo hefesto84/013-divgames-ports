@@ -128,7 +128,92 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Services/SpriteService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/Game/GameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/InitGame/InitGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/States/InitGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/IntroGame.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/IntroGame/IntroGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/IntroGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/LoadingGame/LoadingGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/States/PressStart/PressStartState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/Fruit/FruitSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/Map/MapSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/PacmanSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/Player/PlayerSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Fruit/FruitView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Map/MapItemView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Map/MapView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Player/PlayerView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Tile/TileView.cs">
           <value>
             <set />
           </value>
@@ -139,6 +224,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Resources/properties.ini">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Resources/spritemap-384.json">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Resources/sprites.json">
           <value>
             <set />
           </value>
@@ -459,6 +554,166 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/steroid/Program.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ing-client/ing-client/Program.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ing-client/ing-client/ing-client.csproj">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half-ripper/the-dark-half-ripper/Core/Ripper.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half-ripper/the-dark-half-ripper/the-dark-half-ripper.csproj">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Common/Bootstrap/BaseBootstrap.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Common/Configurations/Base/Config.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Common/Services/Render/RenderService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Common/Services/Screen/ScreenService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Common/Services/Sprite/SpriteService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Common/Views/Base/View.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Bootstrap.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Configurations/DarkHalfConfig.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Models/Hotspot.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Models/Object.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Models/Scene.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Services/Hotspots/HotSpotsService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Services/Scenes/SceneService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Services/Sprite/SpriteService.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/States/DarkHalfState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/States/InitGame/InitGameState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/States/Test/TestState.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Systems/Background/BackgroundSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Systems/Input/InputSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Systems/Objects/ObjectsSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Systems/Typewriter/TypewriterSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Views/Background/BackgroundView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Views/Objects/ObjectView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Game/Views/Typewriter/TypewriterView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Program.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Resources/data.dhd">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/Resources/properties.ini">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../the-dark-half/the-dark-half/the-dark-half.csproj">
           <value>
             <set />
           </value>

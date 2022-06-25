@@ -1,30 +1,47 @@
-﻿using System;
-using common.Core.Bootstrap;
+﻿using common.Core.Bootstrap;
 using pacman_port.Game.Configurations;
-using pacman_port.Game.States;
+using pacman_port.Game.Services;
+using pacman_port.Game.States.Game;
+using pacman_port.Game.States.InitGame;
+using pacman_port.Game.States.IntroGame;
+using pacman_port.Game.States.LoadingGame;
+using pacman_port.Game.States.PressStart;
+using pacman_port.Game.Systems.Fruit;
+using pacman_port.Game.Systems.Map;
+using pacman_port.Game.Systems.Player;
 
 namespace pacman_port.Game
 {
     public class Bootstrap : BaseBootstrap<InitGameState, PacmanConfig>
     {
-        public Bootstrap(PacmanConfig config) : base(config)
-        {
-            
-        }
+        private SpriteService _spriteService;
+
+        private FruitSystem _fruitSystem;
+        private PlayerSystem _playerSystem;
+        private MapSystem _mapSystem;
+        
+        public Bootstrap(PacmanConfig config) : base(config) { }
 
         protected override void InitCustomServices()
         {
-            Console.WriteLine("Custom services");
+            _spriteService = new SpriteService(ScreenService);
+            _spriteService.Init();
         }
 
         protected override void BuildCustomSystems()
         {
-            Console.WriteLine("Build systems");
+            _fruitSystem = new FruitSystem(ScreenService, RenderService, _spriteService);
+            _mapSystem = new MapSystem(ScreenService, RenderService, _spriteService);
+            _playerSystem = new PlayerSystem(ScreenService, RenderService, _spriteService);
         }
 
         protected override void RegisterCustomStates()
         {
             StateFactory.RegisterState(new InitGameState(GameManager, typeof(InitGameState)));
+            StateFactory.RegisterState(new IntroGameState(GameManager, typeof(IntroGameState)));
+            StateFactory.RegisterState(new PressStartState(GameManager, typeof(PressStartState)));
+            StateFactory.RegisterState(new LoadingGameState(GameManager, typeof(LoadingGameState)));
+            StateFactory.RegisterState(new GameState(GameManager, _fruitSystem, _mapSystem, _playerSystem));
         }
     }
 }
