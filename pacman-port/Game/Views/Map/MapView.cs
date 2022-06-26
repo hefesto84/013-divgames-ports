@@ -11,9 +11,9 @@ namespace pacman_port.Game.Views.Map
     public class MapView : View
     {
         private readonly SpriteService _spriteService;
-        private List<TileView> _tileViews;
         
         public Action OnUpdate { get; set; }
+        public List<TileView> TileViews { get; private set; }
         
         public MapView(RenderService renderService, SpriteService spriteService) : base(renderService)
         {
@@ -22,7 +22,7 @@ namespace pacman_port.Game.Views.Map
 
         public void Init(int[,] mapData)
         {
-            _tileViews = new List<TileView>();
+            TileViews = new List<TileView>();
 
             for (var i = 0; i <mapData.GetLength(0); i++)
             {
@@ -30,8 +30,8 @@ namespace pacman_port.Game.Views.Map
                 {
                     if (mapData[i, j] == 1)
                     {
-                        _tileViews.Add(new TileView(RenderService, _spriteService));
-                        _tileViews[^1].Init(new Vector2(24*j,24*i), "test-tile-blocked", this);
+                        TileViews.Add(new TileView(RenderService, _spriteService));
+                        TileViews[^1].Init(new Vector2(24*j,24*i), "test-tile-blocked", this);
                     }
                 }
             }

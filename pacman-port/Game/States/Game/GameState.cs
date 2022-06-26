@@ -28,7 +28,7 @@ namespace pacman_port.Game.States.Game
         {
             _fruitSystem.Init();
             _mapSystem.Init();
-            _playerSystem.Init();
+            _playerSystem.Init(_mapSystem);
         }
 
         public override void DoState()

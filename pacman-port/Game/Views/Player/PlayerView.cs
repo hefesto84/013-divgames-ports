@@ -31,6 +31,8 @@ namespace pacman_port.Game.Views.Player
         {
             _destination.x = currentPosition.X;
             _destination.y = currentPosition.Y;
+            //_center.X = _destination.width * 0.5f;
+            //_center.Y = _destination.height * 0.5f;
             
             Bounds = _destination;
             
