@@ -59,9 +59,37 @@
       "iH": 12
     },
     {
-      "id": "pacman",
+      "id": "pacman-right",
       "iX": 144,
       "iY": 72,
+      "iW": 24,
+      "iH": 24
+    },
+    {
+      "id": "pacman-left",
+      "iX": 48,
+      "iY": 72,
+      "iW": 24,
+      "iH": 24
+    },
+    {
+      "id": "pacman-up",
+      "iX": 72,
+      "iY": 72,
+      "iW": 24,
+      "iH": 24
+    },
+    {
+      "id": "pacman-down",
+      "iX": 168,
+      "iY": 72,
+      "iW": 24,
+      "iH": 24
+    },
+    {
+      "id": "pacman-none",
+      "iX": 0,
+      "iY": 168,
       "iW": 24,
       "iH": 24
     }

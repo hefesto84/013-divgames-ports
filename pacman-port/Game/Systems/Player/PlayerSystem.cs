@@ -22,7 +22,7 @@ namespace pacman_port.Game.Systems.Player
         private int TileHeight { get; set; }
         
         private const int InitialTileX = 1;
-        private const int InitialTileY = 1;
+        private const int InitialTileY = 4;
         private const int PlayerSpeed = 2;
         
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
@@ -84,7 +84,7 @@ namespace pacman_port.Game.Systems.Player
                 _requestedMovementDirection = MovementDirection.Right;
             }
 
-            _view.UpdateView(_currentPosition);
+            _view.UpdateView(_currentPosition, _currentMovementDirection);
         }
 
         private void Move()

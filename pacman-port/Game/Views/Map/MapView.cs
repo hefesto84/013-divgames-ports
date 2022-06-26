@@ -31,7 +31,7 @@ namespace pacman_port.Game.Views.Map
                     if (mapData[i, j] == 1)
                     {
                         TileViews.Add(new TileView(RenderService, _spriteService));
-                        TileViews[^1].Init(new Vector2(24*i,24*j), "test-tile", this);
+                        TileViews[^1].Init(new Vector2(24*i,24*j), "test-tile-blocked", this);
                     }
                 }
             }

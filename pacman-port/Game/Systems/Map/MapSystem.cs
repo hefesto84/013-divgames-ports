@@ -93,11 +93,11 @@ namespace pacman_port.Game.Systems.Map
 
             for (var i = 0; i < Rows; i++)
             {
-                var values = contents[i].ToCharArray();
+                var values = contents[i].Split(",");
                 
                 for (var j = 0; j < values.Length; j++)
                 {
-                    var isValid = Int32.TryParse(values[j].ToString(), out var v);
+                    var isValid = Int32.TryParse(values[j], out var v);
                     _mapData[i, j] = isValid ? v : 0;
                 }
             }
