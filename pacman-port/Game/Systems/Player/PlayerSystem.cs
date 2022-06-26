@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Enums;
@@ -15,10 +14,17 @@ namespace pacman_port.Game.Systems.Player
         private MapSystem _mapSystem;
         private PlayerView _view;
         private Vector2 _currentPosition;
-        private const int PlayerSpeed = 2;
+        
+        private Vector2 _initialPlayerPosition;
         private MovementDirection _requestedMovementDirection = MovementDirection.None;
         private MovementDirection _currentMovementDirection = MovementDirection.None;
-
+        private int TileWidth { get; set; }
+        private int TileHeight { get; set; }
+        
+        private const int InitialTileX = 1;
+        private const int InitialTileY = 1;
+        private const int PlayerSpeed = 2;
+        
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
             base(screenService, renderService, spriteService)
         {
@@ -37,13 +43,21 @@ namespace pacman_port.Game.Systems.Player
             if (_view != null) return;
 
             _view = new PlayerView(RenderService, SpriteService);
-            _currentPosition = new Vector2(24 * 1, 24 * 1);
-            _view.Init(_currentPosition);
+            
+            _view.Init();
+
+            TileWidth = (int)_view.Bounds.width;
+            TileHeight = (int) _view.Bounds.height;
+            
+            _initialPlayerPosition = new Vector2(TileWidth * InitialTileX, TileHeight * InitialTileY);
         }
 
         public override void Reset()
         {
-            _currentPosition = new Vector2(24 * 1, 24 * 1);
+            _currentPosition = _initialPlayerPosition;
+            
+            _currentMovementDirection = MovementDirection.None;
+            _requestedMovementDirection = MovementDirection.None;
         }
 
         public override void Update()
@@ -52,41 +66,21 @@ namespace pacman_port.Game.Systems.Player
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
-                if (_currentMovementDirection == MovementDirection.Down)
-                {
-                    _currentMovementDirection = MovementDirection.Up;
-                }
-
                 _requestedMovementDirection = MovementDirection.Up;
             }
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
             {
-                if (_currentMovementDirection == MovementDirection.Up)
-                {
-                    _currentMovementDirection = MovementDirection.Down;
-                }
-
                 _requestedMovementDirection = MovementDirection.Down;
             }
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
-                if (_currentMovementDirection == MovementDirection.Right)
-                {
-                    _currentMovementDirection = MovementDirection.Left;
-                }
-
                 _requestedMovementDirection = MovementDirection.Left;
             }
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
-                if (_currentMovementDirection == MovementDirection.Left)
-                {
-                    _currentMovementDirection = MovementDirection.Right;
-                }
-
                 _requestedMovementDirection = MovementDirection.Right;
             }
 
@@ -95,20 +89,7 @@ namespace pacman_port.Game.Systems.Player
 
         private void Move()
         {
-            if (_currentMovementDirection != _requestedMovementDirection)
-            {
-                if (_currentPosition.X % 24 == 0 && _currentPosition.Y % 24 == 0)
-                {
-                    if (_mapSystem.CanMove(_currentPosition, _requestedMovementDirection))
-                    {
-                        _currentMovementDirection = _requestedMovementDirection;
-                    }
-                    else
-                    {
-                        _requestedMovementDirection = _currentMovementDirection;
-                    }
-                }
-            }
+            CheckIfDirectionCanBeChanged();
 
             if (!_mapSystem.CanMove(_currentPosition, _currentMovementDirection))
                 return;
@@ -127,6 +108,22 @@ namespace pacman_port.Game.Systems.Player
                 case MovementDirection.Right:
                     _currentPosition.X += PlayerSpeed;
                     break;
+            }
+        }
+
+        private void CheckIfDirectionCanBeChanged()
+        {
+            if (_currentMovementDirection == _requestedMovementDirection) return;
+
+            if (_currentPosition.X % TileWidth != 0 || _currentPosition.Y % TileHeight != 0) return;
+            
+            if (_mapSystem.CanMove(_currentPosition, _requestedMovementDirection))
+            {
+                _currentMovementDirection = _requestedMovementDirection;
+            }
+            else
+            {
+                _requestedMovementDirection = _currentMovementDirection;
             }
         }
     }
