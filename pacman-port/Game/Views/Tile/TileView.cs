@@ -24,7 +24,7 @@ namespace pacman_port.Game.Views.Tile
         public void Init(Vector2 position, string id, MapView mapView)
         {
             _textureData = _spriteService.Get(id);
-            _destination = new Rectangle(position.X, position.Y, _textureData.Item1.width, _textureData.Item1.height);
+            _destination = new Rectangle(position.Y, position.X, _textureData.Item1.width, _textureData.Item1.height);
             
             Bounds = _destination;
             

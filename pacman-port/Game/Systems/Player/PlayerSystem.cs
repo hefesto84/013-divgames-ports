@@ -18,14 +18,16 @@ namespace pacman_port.Game.Systems.Player
         private const int PlayerSpeed = 2;
         private MovementDirection _requestedMovementDirection = MovementDirection.None;
         private MovementDirection _currentMovementDirection = MovementDirection.None;
-        
-        public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) : 
-            base(screenService, renderService, spriteService) { }
-        
+
+        public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
+            base(screenService, renderService, spriteService)
+        {
+        }
+
         public void Init(MapSystem mapSystem)
         {
             _mapSystem = mapSystem;
-            
+
             SetupPlayerView();
             Reset();
         }
@@ -33,23 +35,21 @@ namespace pacman_port.Game.Systems.Player
         private void SetupPlayerView()
         {
             if (_view != null) return;
-            
+
             _view = new PlayerView(RenderService, SpriteService);
-            _currentPosition = new Vector2(24 * 1, 24* 1);
+            _currentPosition = new Vector2(24 * 1, 24 * 1);
             _view.Init(_currentPosition);
         }
 
         public override void Reset()
         {
-            _currentPosition = new Vector2(24 * 1, 24* 1);
+            _currentPosition = new Vector2(24 * 1, 24 * 1);
         }
 
-        private Vector2 _currentVelocity = Vector2.Zero;
-        
         public override void Update()
         {
             Move();
-            
+
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 if (_currentMovementDirection == MovementDirection.Down)
@@ -69,7 +69,7 @@ namespace pacman_port.Game.Systems.Player
 
                 _requestedMovementDirection = MovementDirection.Down;
             }
-            
+
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
                 if (_currentMovementDirection == MovementDirection.Right)
@@ -79,7 +79,7 @@ namespace pacman_port.Game.Systems.Player
 
                 _requestedMovementDirection = MovementDirection.Left;
             }
-            
+
             if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
                 if (_currentMovementDirection == MovementDirection.Left)
@@ -89,7 +89,7 @@ namespace pacman_port.Game.Systems.Player
 
                 _requestedMovementDirection = MovementDirection.Right;
             }
-            
+
             _view.UpdateView(_currentPosition);
         }
 
@@ -99,9 +99,19 @@ namespace pacman_port.Game.Systems.Player
             {
                 if (_currentPosition.X % 24 == 0 && _currentPosition.Y % 24 == 0)
                 {
-                    _currentMovementDirection = _requestedMovementDirection;
+                    if (_mapSystem.CanMove(_currentPosition, _requestedMovementDirection))
+                    {
+                        _currentMovementDirection = _requestedMovementDirection;
+                    }
+                    else
+                    {
+                        _requestedMovementDirection = _currentMovementDirection;
+                    }
                 }
             }
+
+            if (!_mapSystem.CanMove(_currentPosition, _currentMovementDirection))
+                return;
 
             switch (_currentMovementDirection)
             {
@@ -118,11 +128,6 @@ namespace pacman_port.Game.Systems.Player
                     _currentPosition.X += PlayerSpeed;
                     break;
             }
-        }
-
-        public Vector2 GetPosition()
-        {
-            return _currentPosition;
         }
     }
 }

@@ -3,9 +3,9 @@ using System.IO;
 using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Services.Screen;
+using pacman_port.Game.Enums;
 using pacman_port.Game.Services;
 using pacman_port.Game.Views.Map;
-using Raylib_cs;
 
 namespace pacman_port.Game.Systems.Map
 {
@@ -13,14 +13,21 @@ namespace pacman_port.Game.Systems.Map
     {
         private MapView _view;
         private int[,] _mapData;
-        private readonly int[] _currentTilePosition = {0, 0};
+        private int _column;
+        private int _row;
+        private int _nextColumn;
+        private int _nextRow;
+        
+        public int Columns { get; private set; }
+        public int Rows { get; private set; }
         
         public MapSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) : 
             base(screenService, renderService, spriteService) { }
         
         public override void Init()
         {
-            _mapData = LoadMapData();
+            LoadMapData();
+            
             SetupMapView();
             Reset();
         }
@@ -39,44 +46,61 @@ namespace pacman_port.Game.Systems.Map
         {
             _view.Update();
         }
-
-        public bool CanMove(Vector2 playerPosition, int radius)
+        
+        public bool CanMove(Vector2 playerPosition, MovementDirection movementDirection)
         {
-            for (var i = 0; i < _view.TileViews.Count; i++)
+            if (playerPosition.X % 24 == 0 && playerPosition.Y % 24 == 0)
             {
-                var isCollided = Raylib.CheckCollisionCircleRec(playerPosition, radius, _view.TileViews[i].Bounds);
-                if (isCollided) break;
+                switch (movementDirection)
+                {
+                    case MovementDirection.Right:
+                        _nextColumn = (int)playerPosition.X + 24;
+                        _column = _nextColumn / 24;
+                        _row = (int) playerPosition.Y / 24;
+                        break;
+                    case MovementDirection.Left:
+                        _nextColumn = (int)playerPosition.X - 24;
+                        _column = _nextColumn / 24;
+                        _row = (int) playerPosition.Y / 24;
+                        break;
+                    case MovementDirection.Down:
+                        _nextRow = (int)playerPosition.Y + 24;
+                        _row = _nextRow / 24;
+                        _column = (int) playerPosition.X / 24;
+                        break;
+                    case MovementDirection.Up:
+                        _nextRow = (int)playerPosition.Y - 24;
+                        _row = _nextRow / 24;
+                        _column = (int) playerPosition.X / 24;
+                        break;
+                }
+                
+                return _mapData[_row, _column] != 1;
             }
+
             return true;
         }
         
-        private int[,] LoadMapData()
-        {
-            var result = new int[10, 20];
-
-            var contents = File.ReadAllLines(Directory.GetCurrentDirectory() + "/Resources/map.txt");
-
-            var i = 0;
-            
-            foreach (var entry in contents)
-            {
-                for (var j = 0; j < 20; j++)
-                {
-                    var isValid = Int32.TryParse(entry[j].ToString(), out var v);
-                    result[i, j] = isValid ? v : 0;
-                }
-
-                i++;
-            }
-
-            return result;
-        }
-
         
-        private void CheckPosition(Vector2 playerPosition)
+        private void LoadMapData()
         {
-            _currentTilePosition[0] = (int)MathF.Ceiling(playerPosition.X / 24) - 1;
-            _currentTilePosition[1] = (int)MathF.Ceiling(playerPosition.Y / 24) - 1;
+            var contents = File.ReadAllLines(Directory.GetCurrentDirectory() + "/Resources/map.txt");
+            
+            Rows = contents.Length;
+            Columns = contents[0].Length;
+
+            _mapData = new int[Rows, Columns];
+
+            for (var i = 0; i < Rows; i++)
+            {
+                var values = contents[i].ToCharArray();
+                
+                for (var j = 0; j < values.Length; j++)
+                {
+                    var isValid = Int32.TryParse(values[j].ToString(), out var v);
+                    _mapData[i, j] = isValid ? v : 0;
+                }
+            }
         }
     }
 }
