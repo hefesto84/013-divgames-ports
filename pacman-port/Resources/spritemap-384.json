@@ -3,91 +3,56 @@
   "tileHeight": 24,
   "sprites": [
     {
-      "id": "f0",
-      "iX": 0,
-      "iY": 120,
+      "id": 0,
+      "name": "dot",
+      "iX": 288,
+      "iY": 0,
       "iW": 24,
       "iH": 24
     },
     {
-      "id": "f1",
-      "iX": 24,
-      "iY": 120,
+      "id": 2,
+      "name": "super-dot",
+      "iX": 312,
+      "iY": 0,
       "iW": 24,
       "iH": 24
     },
     {
-      "id": "f2",
-      "iX": 48,
-      "iY": 120,
-      "iW": 24,
-      "iH": 24
-    },
-    {
-      "id": "f3",
-      "iX": 72,
-      "iY": 120,
-      "iW": 24,
-      "iH": 24
-    },
-    {
-      "id": "f4",
-      "iX": 96,
-      "iY": 120,
-      "iW": 24,
-      "iH": 24
-    },
-    {
-      "id": "f5",
-      "iX": 120,
-      "iY": 120,
-      "iW": 24,
-      "iH": 24
-    },
-    {
-      "id": "200",
-      "iX": 192,
-      "iY": 48,
-      "iW": 12,
-      "iH": 12
-    },
-    {
-      "id": "201",
-      "iX": 204,
-      "iY": 48,
-      "iW": 12,
-      "iH": 12
-    },
-    {
-      "id": "pacman-right",
+      "id": 100,
+      "name": "pacman-right",
       "iX": 144,
       "iY": 72,
       "iW": 24,
       "iH": 24
     },
     {
-      "id": "pacman-left",
+      "id": 102,
+      "name": "pacman-left",
       "iX": 48,
       "iY": 72,
       "iW": 24,
       "iH": 24
     },
     {
-      "id": "pacman-up",
+      "id": 104,
+      "name": "pacman-up",
       "iX": 72,
       "iY": 72,
       "iW": 24,
       "iH": 24
     },
     {
-      "id": "pacman-down",
+      "id": 106,
+      "name": "pacman-down",
       "iX": 168,
       "iY": 72,
       "iW": 24,
       "iH": 24
     },
     {
-      "id": "pacman-none",
+      "id": 108,
+      "name": "pacman-none",
       "iX": 0,
       "iY": 168,
       "iW": 24,

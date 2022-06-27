@@ -133,6 +133,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Services/SpriteDataEntry.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/Services/SpriteService.cs">
           <value>
             <set />

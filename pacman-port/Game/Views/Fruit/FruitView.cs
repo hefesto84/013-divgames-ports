@@ -42,7 +42,7 @@ namespace pacman_port.Game.Views.Fruit
         public void SetFruitId(int fruitId)
         {
             _lastIndex = fruitId;
-            _textureData = _spriteService.Get($"f3");
+            //_textureData = _spriteService.Get($"f3");
             _destination = new Rectangle(0, 0, _textureData.Item1.width, _textureData.Item1.height);
             _center = Vector2.Zero;
             

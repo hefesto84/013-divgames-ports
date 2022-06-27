@@ -26,11 +26,11 @@ namespace pacman_port.Game.Views.Player
             
             _texturesData = new Dictionary<MovementDirection, Tuple<Rectangle, Texture2D>>();
             
-            _texturesData.Add(MovementDirection.Right,_spriteService.Get("pacman-right"));
-            _texturesData.Add(MovementDirection.Left,_spriteService.Get("pacman-left"));
-            _texturesData.Add(MovementDirection.Up,_spriteService.Get("pacman-up"));
-            _texturesData.Add(MovementDirection.Down,_spriteService.Get("pacman-down"));
-            _texturesData.Add(MovementDirection.None,_spriteService.Get("pacman-none"));
+            _texturesData.Add(MovementDirection.Right,_spriteService.Get(100));
+            _texturesData.Add(MovementDirection.Left,_spriteService.Get(102));
+            _texturesData.Add(MovementDirection.Up,_spriteService.Get(104));
+            _texturesData.Add(MovementDirection.Down,_spriteService.Get(106));
+            _texturesData.Add(MovementDirection.None,_spriteService.Get(108));
             
         }
         

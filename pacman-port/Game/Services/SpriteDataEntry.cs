@@ -7,7 +7,9 @@ namespace pacman_port.Game.Services
     public class SpriteDataEntry
     {
         [JsonProperty("id")]
-        public string Id;
+        public int Id;
+        [JsonProperty("name")] 
+        public string Name;
         [JsonProperty("iX")]
         public int X;
         [JsonProperty("iY")]

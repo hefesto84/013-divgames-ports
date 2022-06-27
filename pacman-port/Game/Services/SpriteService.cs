@@ -12,8 +12,8 @@ namespace pacman_port.Game.Services
         // 3/8
         private Texture2D _mainTexture;
         private Texture2D _testTileTexture;
-        private Dictionary<string, Rectangle> _spriteData;
-        private Dictionary<string, Texture2D> _textureData;
+        private Dictionary<int, Rectangle> _spriteData;
+        private Dictionary<int, Texture2D> _textureData;
         private readonly ScreenService _screenService;
         private Texture2D _testTileBlockedTexture;
 
@@ -22,7 +22,7 @@ namespace pacman_port.Game.Services
             _screenService = screenService;
         }
         
-        public Tuple<Rectangle,Texture2D> Get(string id)
+        public Tuple<Rectangle,Texture2D> Get(int id)
         {
             var isSpriteRegistered = _spriteData.TryGetValue(id, out var rect);
             if (!isSpriteRegistered) throw new Exception($"Sprite with id: {id} not registered.");
@@ -42,8 +42,8 @@ namespace pacman_port.Game.Services
             var data= File.ReadAllText(Directory.GetCurrentDirectory() + "/Resources/spritemap-384.json");
             var contents = JsonConvert.DeserializeObject<SpriteData>(data);
             
-            _spriteData = new Dictionary<string, Rectangle>();
-            _textureData = new Dictionary<string, Texture2D>();
+            _spriteData = new Dictionary<int, Rectangle>();
+            _textureData = new Dictionary<int, Texture2D>();
 
             foreach (var entry in contents.Sprites)
             {
@@ -52,11 +52,11 @@ namespace pacman_port.Game.Services
             }
             
             
-            _spriteData.Add("test-tile",new Rectangle(0,0,24,24));
-            _textureData.Add("test-tile",_testTileTexture);
+            //_spriteData.Add("test-tile",new Rectangle(0,0,24,24));
+            //_textureData.Add("test-tile",_testTileTexture);
             
-            _spriteData.Add("test-tile-blocked",new Rectangle(0,0,24,24));
-            _textureData.Add("test-tile-blocked",_testTileBlockedTexture);
+            _spriteData.Add(1,new Rectangle(0,0,24,24));
+            _textureData.Add(1,_testTileBlockedTexture);
             
             Console.WriteLine($"Assets loaded: {_spriteData.Count}");
         }

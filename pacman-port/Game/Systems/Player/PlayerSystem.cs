@@ -21,9 +21,9 @@ namespace pacman_port.Game.Systems.Player
         private int TileWidth { get; set; }
         private int TileHeight { get; set; }
         
-        private const int InitialTileX = 1;
-        private const int InitialTileY = 4;
-        private const int PlayerSpeed = 2;
+        private const int InitialTileX = 9;
+        private const int InitialTileY = 19;
+        private const int PlayerSpeed = 4;
         
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
             base(screenService, renderService, spriteService)

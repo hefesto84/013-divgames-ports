@@ -28,11 +28,10 @@ namespace pacman_port.Game.Views.Map
             {
                 for (var j = 0; j < mapData.GetLength(1); j++)
                 {
-                    if (mapData[i, j] == 1)
-                    {
-                        TileViews.Add(new TileView(RenderService, _spriteService));
-                        TileViews[^1].Init(new Vector2(24*i,24*j), "test-tile-blocked", this);
-                    }
+                    if(mapData[i,j] == -1) continue;
+                    
+                    TileViews.Add(new TileView(RenderService, _spriteService));
+                    TileViews[^1].Init(new Vector2(i,j),mapData[i,j],this);
                 }
             }
         }

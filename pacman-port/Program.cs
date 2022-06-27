@@ -1,5 +1,4 @@
-﻿using System;
-using pacman_port.Game;
+﻿using pacman_port.Game;
 using pacman_port.Game.Configurations;
 
 namespace pacman_port
