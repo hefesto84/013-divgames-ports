@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Enums;
@@ -14,6 +15,8 @@ namespace pacman_port.Game.Systems.Player
         private MapSystem _mapSystem;
         private PlayerView _view;
         private Vector2 _currentPosition;
+        private Vector2 _currentTile;
+        private Vector2 _lastTile = new Vector2(-1, -1);
         
         private Vector2 _initialPlayerPosition;
         private MovementDirection _requestedMovementDirection = MovementDirection.None;
@@ -25,6 +28,7 @@ namespace pacman_port.Game.Systems.Player
         private const int InitialTileY = 19;
         private const int PlayerSpeed = 4;
         
+
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
             base(screenService, renderService, spriteService)
         {
@@ -62,8 +66,17 @@ namespace pacman_port.Game.Systems.Player
 
         public override void Update()
         {
+            ProcessCurrentTile();
+           
             Move();
+            
+            ProcessRequestedDirection();
 
+            _view.UpdateView(_currentPosition, _currentMovementDirection);
+        }
+
+        private void ProcessRequestedDirection()
+        {
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 _requestedMovementDirection = MovementDirection.Up;
@@ -83,10 +96,8 @@ namespace pacman_port.Game.Systems.Player
             {
                 _requestedMovementDirection = MovementDirection.Right;
             }
-
-            _view.UpdateView(_currentPosition, _currentMovementDirection);
         }
-
+        
         private void Move()
         {
             CheckIfDirectionCanBeChanged();
@@ -109,13 +120,18 @@ namespace pacman_port.Game.Systems.Player
                     _currentPosition.X += PlayerSpeed;
                     break;
             }
+            
+            ProcessCurrentTile();
         }
 
         private void CheckIfDirectionCanBeChanged()
         {
             if (_currentMovementDirection == _requestedMovementDirection) return;
 
-            if (_currentPosition.X % TileWidth != 0 || _currentPosition.Y % TileHeight != 0) return;
+            _currentTile.X = _currentPosition.X % 24;
+            _currentTile.Y = _currentPosition.Y % 24;
+            
+            if (_currentTile.X != 0 || _currentTile.Y != 0) return;
             
             if (_mapSystem.CanMove(_currentPosition, _requestedMovementDirection))
             {
@@ -125,6 +141,20 @@ namespace pacman_port.Game.Systems.Player
             {
                 _requestedMovementDirection = _currentMovementDirection;
             }
+        }
+
+        private void ProcessCurrentTile()
+        {
+            _currentTile.X = (int)MathF.Ceiling(_currentPosition.X / 24);
+            _currentTile.Y = (int)MathF.Ceiling(_currentPosition.Y / 24);
+
+            if (_lastTile == _currentTile) return;
+
+            _lastTile = _currentTile;
+            
+            var i = _mapSystem.GetTile(_currentTile);
+
+            Console.WriteLine($"Current Tile: {_currentTile.X},{_currentTile.Y}, {i}");
         }
     }
 }

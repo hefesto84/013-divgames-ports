@@ -102,5 +102,10 @@ namespace pacman_port.Game.Systems.Map
                 }
             }
         }
+
+        public int GetTile(Vector2 currentTile)
+        {
+            return _mapData[(int)currentTile.Y, (int)currentTile.X];
+        }
     }
 }

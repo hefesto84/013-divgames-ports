@@ -51,8 +51,6 @@ namespace pacman_port.Game.Views.Player
         public void UpdateView(Vector2 currentPosition, MovementDirection currentMovementDirection)
         {
             _textureData = _texturesData[currentMovementDirection];
-            //if (currentMovementDirection == MovementDirection.Right) _textureData = _spriteService.Get("pacman-right");
-            //if (currentMovementDirection == MovementDirection.Left) _textureData = _spriteService.Get("pacman-left");
             
             _destination.x = currentPosition.X;
             _destination.y = currentPosition.Y;
