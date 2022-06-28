@@ -2,6 +2,7 @@
 using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Views.Fruit;
 using Raylib_cs;
 
@@ -31,7 +32,7 @@ namespace pacman_port.Game.Systems.Fruit
 
         public override void Reset()
         {
-            _currentPosition = new Vector2(24 * 3, 24 * 3);
+            _currentPosition = new Vector2(_view.Bounds.width * 3, _view.Bounds.height * 3);
         }
 
         public override void Update()

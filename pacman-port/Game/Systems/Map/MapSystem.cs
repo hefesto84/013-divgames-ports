@@ -5,48 +5,74 @@ using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Enums;
 using pacman_port.Game.Services;
-using pacman_port.Game.Views.Map;
+using pacman_port.Game.Services.Sprite;
+using pacman_port.Game.Views.Tile;
 
 namespace pacman_port.Game.Systems.Map
 {
     public class MapSystem : PacmanSystem
     {
-        private MapView _view;
-        //private int[,] _mapData;
+        private TileView[,] _tileViews;
         private MapData _mapData;
         
         private int _column;
         private int _row;
         private int _nextColumn;
         private int _nextRow;
-        
-        public int Columns { get; private set; }
-        public int Rows { get; private set; }
-        
+
+        private int Columns { get; set; }
+        private int Rows { get; set; }
+        public int MaxBigBalls { get; set; }
+        public int MaxMiniBalls { get; set; }
+
         public MapSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) : 
             base(screenService, renderService, spriteService) { }
         
         public override void Init()
         {
             LoadMapData();
-            
             SetupMapView();
             Reset();
         }
 
         private void SetupMapView()
         {
-            if (_view != null) return;
+            _tileViews = new TileView[_mapData.Data.GetLength(0), _mapData.Data.GetLength(1)];
+            var k = 0;
+            var p = _mapData.Data.GetLength(0); // 26
+            var l = _mapData.Data.GetLength(1); // 56
             
-            _view = new MapView(RenderService, SpriteService);
-            _view.Init(_mapData);
+            for (var j = 0; j < _mapData.Data.GetLength(1); j++)
+            {
+                for (var i = 0; i <_mapData.Data.GetLength(0); i++)
+                {
+                    if (_mapData.Data[i, j].T == 2){ MaxBigBalls++;}
+                    if (_mapData.Data[i, j].T == 0){ MaxMiniBalls++;}
+
+                    k++;
+                    
+                    _tileViews[i, j] = new TileView(RenderService, SpriteService);
+                    _tileViews[i,j].Init(new Vector2(i,j),_mapData.Data[i,j]);
+                }
+            }
+            
+            Console.WriteLine("M: "+k); // ESO DA
         }
 
         public override void Reset() { }
 
         public override void Update()
         {
-            _view.Update();
+            for (var j = 0; j < _mapData.Data.GetLength(1); j++)
+            {
+                for (var i = 0; i < _mapData.Data.GetLength(0); i++)
+                {
+                    if (_tileViews[i, j] != null)
+                    {
+                        _tileViews[i, j].Update();
+                    }
+                }
+            }
         }
         
         public bool CanMove(Vector2 playerPosition, MovementDirection movementDirection)
@@ -89,7 +115,7 @@ namespace pacman_port.Game.Systems.Map
             var contents = File.ReadAllLines(Directory.GetCurrentDirectory() + "/Resources/map.txt");
             
             Rows = contents.Length;
-            Columns = contents[0].Length;
+            Columns = contents[0].Split(",").Length;
 
             _mapData = new MapData
             {
@@ -106,24 +132,24 @@ namespace pacman_port.Game.Systems.Map
                     _mapData.Data[i, j].X = j;
                     _mapData.Data[i, j].Y = i;
                     _mapData.Data[i, j].T = isValid ? v : 0;
+                    if(!isValid) Console.WriteLine("this is null: "+j+"-"+i);
                 }
             }
         }
 
-        public MapDataEntry GetTile(Vector2 currentTile)
+        public int Consume(Vector2 currentTile)
         {
-            return _mapData.Data[(int) currentTile.Y, (int) currentTile.X];
-        }
+            var x = (int) currentTile.X;
+            var y = (int) currentTile.Y;
+            
+            var result = _mapData.Data[y, x].T;
+            
+            _mapData.Data[y, x].T = -1;
+            _tileViews[y, x].SetData(_mapData.Data[y, x]);
+            
+            Console.WriteLine($"Current Tile: {_mapData.Data[y, x].X},{_mapData.Data[y, x].Y},{_mapData.Data[y, x].T}");
 
-        public void Consume(Vector2 currentTile)
-        {
-            Console.WriteLine($"Current Tile: {currentTile.X},{currentTile.Y}");
-            /*
-            if (_mapData.Data[mapDataEntry.X, mapDataEntry.Y].T == 0)
-            {
-                _mapData.Data[mapDataEntry.X, mapDataEntry.Y].T = -1;
-            }
-            */
+            return result;
         }
     }
 }

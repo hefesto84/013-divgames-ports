@@ -5,7 +5,7 @@ using common.Core.Services.Screen;
 using Newtonsoft.Json;
 using Raylib_cs;
 
-namespace pacman_port.Game.Services
+namespace pacman_port.Game.Services.Sprite
 {
     public class SpriteService
     {

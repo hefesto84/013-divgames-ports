@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace pacman_port.Game.Services
+namespace pacman_port.Game.Services.Sprite
 {
     [Serializable]
     public class SpriteDataEntry

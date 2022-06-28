@@ -1,11 +1,13 @@
 ﻿using common.Core.Bootstrap;
 using pacman_port.Game.Configurations;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.States.Game;
 using pacman_port.Game.States.InitGame;
 using pacman_port.Game.States.IntroGame;
 using pacman_port.Game.States.LoadingGame;
 using pacman_port.Game.States.PressStart;
+using pacman_port.Game.Systems.Consumer;
 using pacman_port.Game.Systems.Fruit;
 using pacman_port.Game.Systems.Map;
 using pacman_port.Game.Systems.Player;
@@ -19,6 +21,7 @@ namespace pacman_port.Game
         private FruitSystem _fruitSystem;
         private PlayerSystem _playerSystem;
         private MapSystem _mapSystem;
+        private ConsumerSystem _consumerSystem;
         
         public Bootstrap(PacmanConfig config) : base(config) { }
 
@@ -33,6 +36,7 @@ namespace pacman_port.Game
             _fruitSystem = new FruitSystem(ScreenService, RenderService, _spriteService);
             _mapSystem = new MapSystem(ScreenService, RenderService, _spriteService);
             _playerSystem = new PlayerSystem(ScreenService, RenderService, _spriteService);
+            _consumerSystem = new ConsumerSystem(_playerSystem, _mapSystem);
         }
 
         protected override void RegisterCustomStates()
@@ -41,7 +45,7 @@ namespace pacman_port.Game
             StateFactory.RegisterState(new IntroGameState(GameManager, typeof(IntroGameState)));
             StateFactory.RegisterState(new PressStartState(GameManager, typeof(PressStartState)));
             StateFactory.RegisterState(new LoadingGameState(GameManager, typeof(LoadingGameState)));
-            StateFactory.RegisterState(new GameState(GameManager, _fruitSystem, _mapSystem, _playerSystem));
+            StateFactory.RegisterState(new GameState(GameManager, _fruitSystem, _mapSystem, _playerSystem, _consumerSystem));
         }
     }
 }

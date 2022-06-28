@@ -4,6 +4,7 @@ using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Enums;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Systems.Map;
 using pacman_port.Game.Views.Player;
 using Raylib_cs;
@@ -16,8 +17,7 @@ namespace pacman_port.Game.Systems.Player
         private PlayerView _view;
         private Vector2 _currentPosition;
         private Vector2 _currentTile;
-        private Vector2 _lastTile = new Vector2(-1, -1);
-        
+
         private Vector2 _initialPlayerPosition;
         private MovementDirection _requestedMovementDirection = MovementDirection.None;
         private MovementDirection _currentMovementDirection = MovementDirection.None;
@@ -66,8 +66,6 @@ namespace pacman_port.Game.Systems.Player
 
         public override void Update()
         {
-            ProcessCurrentTile();
-           
             Move();
             
             ProcessRequestedDirection();
@@ -120,16 +118,14 @@ namespace pacman_port.Game.Systems.Player
                     _currentPosition.X += PlayerSpeed;
                     break;
             }
-            
-            ProcessCurrentTile();
         }
 
         private void CheckIfDirectionCanBeChanged()
         {
             if (_currentMovementDirection == _requestedMovementDirection) return;
 
-            _currentTile.X = _currentPosition.X % 24;
-            _currentTile.Y = _currentPosition.Y % 24;
+            _currentTile.X = _currentPosition.X % TileWidth;
+            _currentTile.Y = _currentPosition.Y % TileHeight;
             
             if (_currentTile.X != 0 || _currentTile.Y != 0) return;
             
@@ -143,19 +139,12 @@ namespace pacman_port.Game.Systems.Player
             }
         }
 
-        private void ProcessCurrentTile()
+        public Vector2 GetCurrentTile()
         {
-            _currentTile.X = (int)MathF.Ceiling(_currentPosition.X / 24);
-            _currentTile.Y = (int)MathF.Ceiling(_currentPosition.Y / 24);
+            _currentTile.X = (int)MathF.Ceiling(_currentPosition.X / TileWidth);
+            _currentTile.Y = (int)MathF.Ceiling(_currentPosition.Y / TileHeight);
 
-            if (_lastTile == _currentTile) return;
-
-            _lastTile = _currentTile;
-            
-            _mapSystem.Consume(_currentTile);
-            //var mapDataEntry = _mapSystem.GetTile(_currentTile);
-
-            //Console.WriteLine($"Current Tile: {_currentTile.X},{_currentTile.Y}, {mapDataEntry.T}");
+            return _currentTile;
         }
     }
 }

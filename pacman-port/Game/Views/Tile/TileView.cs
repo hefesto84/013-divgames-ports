@@ -3,29 +3,34 @@ using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Views.Base;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Systems.Map;
-using pacman_port.Game.Views.Map;
 using Raylib_cs;
 
 namespace pacman_port.Game.Views.Tile
 {
     public class TileView : View
     {
-        private SpriteService _spriteService;
+        private readonly SpriteService _spriteService;
+        private readonly Vector2 _center = Vector2.Zero;
+        
         private Tuple<Rectangle,Texture2D> _textureData;
         private Rectangle _destination;
-        private Vector2 _center = Vector2.Zero;
-        private MapView _mapView;
         private MapDataEntry _mapDataEntry;
+        private bool isRenderable = true;
         
         public TileView(RenderService renderService, SpriteService spriteService) : base(renderService)
         {
             _spriteService = spriteService;
         }
 
-        public void Init(Vector2 position, ref MapDataEntry mapDataEntry, MapView mapView)
+        public void Init(Vector2 position, MapDataEntry mapDataEntry)
         {
+            isRenderable = mapDataEntry.T != -1;
+            
             _mapDataEntry = mapDataEntry;
+
+            if (!isRenderable) return;
             
             _textureData = _spriteService.Get(_mapDataEntry.T);
             
@@ -33,23 +38,26 @@ namespace pacman_port.Game.Views.Tile
             
             Bounds = _destination;
 
-            mapView.OnUpdate += OnUpdate;
         }
-        
-        private void OnUpdate()
+
+        /*
+        public void UpdateData(MapDataEntry mapDataEntry)
         {
+            
+            _mapDataEntry = mapDataEntry;
+            _textureData = _spriteService.Get(_mapDataEntry.T);
+            _mapSystem.OnUpdate -= OnUpdate;
+        }
+        */
+        public void Update()
+        {
+            if (!isRenderable) return;
             RenderService.Render(_textureData.Item2, _textureData.Item1, Bounds, _center, 0);
         }
 
-        public void SetMapDataEntry(MapDataEntry mapDataEntry)
+        public void SetData(MapDataEntry mapDataEntry)
         {
-            _mapDataEntry = mapDataEntry;
-            _textureData = _spriteService.Get(_mapDataEntry.T);
-        }
-        
-        ~TileView()
-        {
-            _mapView.OnUpdate -= OnUpdate;
+            isRenderable = mapDataEntry.T != -1;
         }
     }
 }
