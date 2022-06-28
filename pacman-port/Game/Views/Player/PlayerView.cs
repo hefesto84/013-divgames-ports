@@ -4,7 +4,6 @@ using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Views.Base;
 using pacman_port.Game.Enums;
-using pacman_port.Game.Services;
 using pacman_port.Game.Services.Sprite;
 using Raylib_cs;
 
