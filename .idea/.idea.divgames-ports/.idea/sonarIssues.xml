@@ -183,6 +183,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/Consumer/ConsumerSystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/Fruit/FruitSystem.cs">
           <value>
             <set />

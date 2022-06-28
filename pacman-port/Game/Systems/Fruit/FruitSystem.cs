@@ -31,7 +31,7 @@ namespace pacman_port.Game.Systems.Fruit
 
         public override void Reset()
         {
-            _currentPosition = new Vector2(24 * 3, 24 * 3);
+            _currentPosition = new Vector2(_view.Bounds.width * 3, _view.Bounds.height * 3);
         }
 
         public override void Update()
