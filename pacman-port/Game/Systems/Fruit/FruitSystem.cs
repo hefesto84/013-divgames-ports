@@ -2,6 +2,7 @@
 using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Views.Fruit;
 using Raylib_cs;
 

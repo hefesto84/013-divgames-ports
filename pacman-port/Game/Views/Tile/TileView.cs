@@ -3,6 +3,7 @@ using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Views.Base;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Systems.Map;
 using Raylib_cs;
 

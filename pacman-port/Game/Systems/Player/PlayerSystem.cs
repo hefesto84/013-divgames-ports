@@ -4,6 +4,7 @@ using common.Core.Services.Render;
 using common.Core.Services.Screen;
 using pacman_port.Game.Enums;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Systems.Map;
 using pacman_port.Game.Views.Player;
 using Raylib_cs;

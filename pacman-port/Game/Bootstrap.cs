@@ -1,6 +1,7 @@
 ﻿using common.Core.Bootstrap;
 using pacman_port.Game.Configurations;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.States.Game;
 using pacman_port.Game.States.InitGame;
 using pacman_port.Game.States.IntroGame;
