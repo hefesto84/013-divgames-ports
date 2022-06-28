@@ -152,9 +152,10 @@ namespace pacman_port.Game.Systems.Player
 
             _lastTile = _currentTile;
             
-            var i = _mapSystem.GetTile(_currentTile);
+            _mapSystem.Consume(_currentTile);
+            //var mapDataEntry = _mapSystem.GetTile(_currentTile);
 
-            Console.WriteLine($"Current Tile: {_currentTile.X},{_currentTile.Y}, {i}");
+            //Console.WriteLine($"Current Tile: {_currentTile.X},{_currentTile.Y}, {mapDataEntry.T}");
         }
     }
 }

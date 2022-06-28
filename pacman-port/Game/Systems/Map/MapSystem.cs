@@ -12,7 +12,9 @@ namespace pacman_port.Game.Systems.Map
     public class MapSystem : PacmanSystem
     {
         private MapView _view;
-        private int[,] _mapData;
+        //private int[,] _mapData;
+        private MapData _mapData;
+        
         private int _column;
         private int _row;
         private int _nextColumn;
@@ -75,7 +77,7 @@ namespace pacman_port.Game.Systems.Map
                         break;
                 }
                 
-                return _mapData[_row, _column] != 1;
+                return _mapData.Data[_row, _column].T != 1;
             }
 
             return true;
@@ -89,7 +91,10 @@ namespace pacman_port.Game.Systems.Map
             Rows = contents.Length;
             Columns = contents[0].Length;
 
-            _mapData = new int[Rows, Columns];
+            _mapData = new MapData
+            {
+                Data = new MapDataEntry[Rows,Columns]
+            };
 
             for (var i = 0; i < Rows; i++)
             {
@@ -98,14 +103,27 @@ namespace pacman_port.Game.Systems.Map
                 for (var j = 0; j < values.Length; j++)
                 {
                     var isValid = Int32.TryParse(values[j], out var v);
-                    _mapData[i, j] = isValid ? v : 0;
+                    _mapData.Data[i, j].X = j;
+                    _mapData.Data[i, j].Y = i;
+                    _mapData.Data[i, j].T = isValid ? v : 0;
                 }
             }
         }
 
-        public int GetTile(Vector2 currentTile)
+        public MapDataEntry GetTile(Vector2 currentTile)
         {
-            return _mapData[(int)currentTile.Y, (int)currentTile.X];
+            return _mapData.Data[(int) currentTile.Y, (int) currentTile.X];
+        }
+
+        public void Consume(Vector2 currentTile)
+        {
+            Console.WriteLine($"Current Tile: {currentTile.X},{currentTile.Y}");
+            /*
+            if (_mapData.Data[mapDataEntry.X, mapDataEntry.Y].T == 0)
+            {
+                _mapData.Data[mapDataEntry.X, mapDataEntry.Y].T = -1;
+            }
+            */
         }
     }
 }
