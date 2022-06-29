@@ -1,6 +1,7 @@
 ﻿using common.Core.Bootstrap;
 using pacman_port.Game.Configurations;
 using pacman_port.Game.Services;
+using pacman_port.Game.Services.Game;
 using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.States.Game;
 using pacman_port.Game.States.InitGame;
@@ -17,6 +18,7 @@ namespace pacman_port.Game
     public class Bootstrap : BaseBootstrap<InitGameState, PacmanConfig>
     {
         private SpriteService _spriteService;
+        private GameService _gameService;
 
         private FruitSystem _fruitSystem;
         private PlayerSystem _playerSystem;
@@ -28,7 +30,9 @@ namespace pacman_port.Game
         protected override void InitCustomServices()
         {
             _spriteService = new SpriteService(ScreenService);
+            _gameService = new GameService();
             _spriteService.Init();
+            _gameService.Init();
         }
 
         protected override void BuildCustomSystems()
@@ -36,7 +40,7 @@ namespace pacman_port.Game
             _fruitSystem = new FruitSystem(ScreenService, RenderService, _spriteService);
             _mapSystem = new MapSystem(ScreenService, RenderService, _spriteService);
             _playerSystem = new PlayerSystem(ScreenService, RenderService, _spriteService);
-            _consumerSystem = new ConsumerSystem(_playerSystem, _mapSystem);
+            _consumerSystem = new ConsumerSystem(_gameService, _playerSystem, _mapSystem);
         }
 
         protected override void RegisterCustomStates()

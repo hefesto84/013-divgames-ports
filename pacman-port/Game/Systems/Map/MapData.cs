@@ -1,4 +1,6 @@
-﻿namespace pacman_port.Game.Systems.Map
+﻿using pacman_port.Game.Enums;
+
+namespace pacman_port.Game.Systems.Map
 {
     public struct MapData
     {
@@ -9,6 +11,6 @@
     {
         public int X;
         public int Y;
-        public int T;
+        public TileType T;
     }
 }

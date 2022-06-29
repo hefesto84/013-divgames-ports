@@ -2,6 +2,7 @@
 using System.Numerics;
 using common.Core.Services.Render;
 using common.Core.Views.Base;
+using pacman_port.Game.Enums;
 using pacman_port.Game.Services;
 using pacman_port.Game.Services.Sprite;
 using pacman_port.Game.Systems.Map;
@@ -26,13 +27,13 @@ namespace pacman_port.Game.Views.Tile
 
         public void Init(Vector2 position, MapDataEntry mapDataEntry)
         {
-            isRenderable = mapDataEntry.T != -1;
+            isRenderable = mapDataEntry.T != TileType.None;
             
             _mapDataEntry = mapDataEntry;
 
             if (!isRenderable) return;
             
-            _textureData = _spriteService.Get(_mapDataEntry.T);
+            _textureData = _spriteService.Get((int)_mapDataEntry.T);
             
             _destination = new Rectangle(position.Y*24, position.X*24, _textureData.Item1.width, _textureData.Item1.height);
             
@@ -57,7 +58,7 @@ namespace pacman_port.Game.Views.Tile
 
         public void SetData(MapDataEntry mapDataEntry)
         {
-            isRenderable = mapDataEntry.T != -1;
+            isRenderable = mapDataEntry.T != TileType.None;
         }
     }
 }

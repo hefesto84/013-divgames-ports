@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Numerics;
+using pacman_port.Game.Enums;
+using pacman_port.Game.Services.Game;
 using pacman_port.Game.Systems.Map;
 using pacman_port.Game.Systems.Player;
 
@@ -7,6 +9,7 @@ namespace pacman_port.Game.Systems.Consumer
 {
     public class ConsumerSystem : common.Core.Systems.Base.System
     {
+        private readonly GameService _gameService;
         private readonly PlayerSystem _playerSystem;
         private readonly MapSystem _mapSystem;
         public Action<bool> OnBigBallConsumed { get; set; }
@@ -19,8 +22,9 @@ namespace pacman_port.Game.Systems.Consumer
         private int _maxBigBalls = 0;
         private int _maxMiniBalls = 0;
         
-        public ConsumerSystem(PlayerSystem playerSystem, MapSystem mapSystem)
+        public ConsumerSystem(GameService gameService, PlayerSystem playerSystem, MapSystem mapSystem)
         {
+            _gameService = gameService;
             _playerSystem = playerSystem;
             _mapSystem = mapSystem;
         }
@@ -61,13 +65,15 @@ namespace pacman_port.Game.Systems.Consumer
 
             var result = _mapSystem.Consume(_currentTile);
 
+            
             switch (result)
             {
-                case 0:
+                case TileType.MiniBall:
                     _currentMiniBalls++;
+                    //_gameService.
                     OnMiniBallConsumed?.Invoke(_currentMiniBalls == _maxMiniBalls);
                     break;
-                case 2:
+                case TileType.BigBall:
                     _currentBigBalls++;
                     OnBigBallConsumed?.Invoke(_currentBigBalls == _maxBigBalls);
                     break;

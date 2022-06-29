@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using common.Core.Services.Render;
@@ -27,6 +28,14 @@ namespace pacman_port.Game.Systems.Map
         
         public Action PlayerIsOnMapLimit { get; set; }
 
+        private readonly Dictionary<int, TileType> _tileTypes = new Dictionary<int, TileType>()
+        {
+            {-1,TileType.None},
+            {0, TileType.MiniBall},
+            {1, TileType.Wall},
+            {2, TileType.BigBall}
+        };
+        
         public MapSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) : 
             base(screenService, renderService, spriteService) { }
         
@@ -48,8 +57,8 @@ namespace pacman_port.Game.Systems.Map
             {
                 for (var i = 0; i <_mapData.Data.GetLength(0); i++)
                 {
-                    if (_mapData.Data[i, j].T == 2){ MaxBigBalls++;}
-                    if (_mapData.Data[i, j].T == 0){ MaxMiniBalls++;}
+                    if (_mapData.Data[i, j].T == TileType.BigBall){ MaxBigBalls++;}
+                    if (_mapData.Data[i, j].T == TileType.MiniBall){ MaxMiniBalls++;}
 
                     k++;
                     
@@ -116,7 +125,7 @@ namespace pacman_port.Game.Systems.Map
                     return true;
                 }
                 
-                return _mapData.Data[_row, _column].T != 1;
+                return _mapData.Data[_row, _column].T != TileType.Wall;
             }
 
             return true;
@@ -144,30 +153,23 @@ namespace pacman_port.Game.Systems.Map
                     var isValid = Int32.TryParse(values[j], out var v);
                     _mapData.Data[i, j].X = j;
                     _mapData.Data[i, j].Y = i;
-                    _mapData.Data[i, j].T = isValid ? v : 0;
+                    _mapData.Data[i, j].T = isValid ? _tileTypes[v] : TileType.MiniBall;
                     if(!isValid) Console.WriteLine("this is null: "+j+"-"+i);
                 }
             }
         }
 
-        public int Consume(Vector2 currentTile)
+        public TileType Consume(Vector2 currentTile)
         {
             var x = (int) currentTile.X;
             var y = (int) currentTile.Y;
-            var result = 0;
+            var result = TileType.None;
 
-            if (x < 0 || x > Columns - 1) return -1;
+            if (x < 0 || x > Columns - 1) return TileType.None;
             
-            try
-            {
-                result = _mapData.Data[y, x].T;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("MSS");
-            }
-
-            _mapData.Data[y, x].T = -1;
+            result = _mapData.Data[y, x].T;
+            
+            _mapData.Data[y, x].T = TileType.None;
             _tileViews[y, x].SetData(_mapData.Data[y, x]);
             
             Console.WriteLine($"Current Tile: {_mapData.Data[y, x].X},{_mapData.Data[y, x].Y},{_mapData.Data[y, x].T}");
