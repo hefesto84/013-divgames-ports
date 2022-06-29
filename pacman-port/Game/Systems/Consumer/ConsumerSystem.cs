@@ -17,6 +17,7 @@ namespace pacman_port.Game.Systems.Consumer
         private Vector2 _lastTile = new Vector2(-1, -1);
         private Vector2 _currentTile = Vector2.Zero;
         private bool _isReady;
+        
         private int _currentBigBalls = 0;
         private int _currentMiniBalls = 0;
         private int _maxBigBalls = 0;
@@ -39,10 +40,12 @@ namespace pacman_port.Game.Systems.Consumer
             _isReady = true;
             _lastTile = new Vector2(-1, -1);
             _currentTile = Vector2.Zero;
+            
             _maxBigBalls = _mapSystem.MaxBigBalls;
             _maxMiniBalls = _mapSystem.MaxMiniBalls;
             _currentBigBalls = 0;
             _currentMiniBalls = 0;
+            
         }
 
         public override void Update()
@@ -65,12 +68,10 @@ namespace pacman_port.Game.Systems.Consumer
 
             var result = _mapSystem.Consume(_currentTile);
 
-            
             switch (result)
             {
                 case TileType.MiniBall:
                     _currentMiniBalls++;
-                    //_gameService.
                     OnMiniBallConsumed?.Invoke(_currentMiniBalls == _maxMiniBalls);
                     break;
                 case TileType.BigBall:
@@ -79,8 +80,9 @@ namespace pacman_port.Game.Systems.Consumer
                     break;
             }
             
+            _gameService.UpdateScore(result);
             
-            Console.WriteLine($"Big balls: {_currentBigBalls}/{_maxBigBalls}, Mini balls: {_currentMiniBalls}/{_maxMiniBalls}");
+            //Console.WriteLine($"Big balls: {_currentBigBalls}/{_maxBigBalls}, Mini balls: {_currentMiniBalls}/{_maxMiniBalls}");
         }
     }
 }

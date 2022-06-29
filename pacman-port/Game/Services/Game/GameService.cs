@@ -1,4 +1,7 @@
-﻿namespace pacman_port.Game.Services.Game
+﻿using System;
+using pacman_port.Game.Enums;
+
+namespace pacman_port.Game.Services.Game
 {
     public class GameService
     {
@@ -8,7 +11,7 @@
         
         public GameService()
         {
-            
+                
         }
 
         public void Init()
@@ -18,8 +21,24 @@
 
         public void Reset()
         {
+            CurrentScore = 0;
             MaxLives = 3;
             CurrentLives = 3;
+        }
+
+        public void UpdateScore(TileType result)
+        {
+            switch (result)
+            {
+                case TileType.BigBall:
+                    CurrentScore += (int) ConsumableType.BigBall;
+                    break;
+                case TileType.MiniBall:
+                    CurrentScore += (int) ConsumableType.MiniBall;
+                    break;
+            }
+            
+            Console.WriteLine($"Current Score: {CurrentScore}");
         }
     }
 }

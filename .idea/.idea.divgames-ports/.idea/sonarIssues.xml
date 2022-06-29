@@ -128,12 +128,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Enums/Consumable.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/Enums/MovementDirection.cs">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/Enums/TileType.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Services/Game/GameService.cs">
           <value>
             <set />
           </value>

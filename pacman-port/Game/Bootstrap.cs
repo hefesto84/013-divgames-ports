@@ -49,7 +49,7 @@ namespace pacman_port.Game
             StateFactory.RegisterState(new IntroGameState(GameManager, typeof(IntroGameState)));
             StateFactory.RegisterState(new PressStartState(GameManager, typeof(PressStartState)));
             StateFactory.RegisterState(new LoadingGameState(GameManager, typeof(LoadingGameState)));
-            StateFactory.RegisterState(new GameState(GameManager, _fruitSystem, _mapSystem, _playerSystem, _consumerSystem));
+            StateFactory.RegisterState(new GameState(GameManager, _gameService, _fruitSystem, _mapSystem, _playerSystem, _consumerSystem));
         }
     }
 }
