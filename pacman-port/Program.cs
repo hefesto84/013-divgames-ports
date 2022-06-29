@@ -1,5 +1,6 @@
 ﻿using pacman_port.Game;
 using pacman_port.Game.Configurations;
+using Raylib_cs;
 
 namespace pacman_port
 {
@@ -17,6 +18,7 @@ namespace pacman_port
             while (!bootstrap.IsQuit)
             {
                 bootstrap.Update();
+                Raylib.DrawFPS(0,0);
             }
         }
     }
