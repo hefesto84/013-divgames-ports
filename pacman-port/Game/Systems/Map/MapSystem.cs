@@ -20,10 +20,12 @@ namespace pacman_port.Game.Systems.Map
         private int _nextColumn;
         private int _nextRow;
 
-        private int Columns { get; set; }
-        private int Rows { get; set; }
+        public int Columns { get; set; }
+        public int Rows { get; set; }
         public int MaxBigBalls { get; set; }
         public int MaxMiniBalls { get; set; }
+        
+        public Action PlayerIsOnMapLimit { get; set; }
 
         public MapSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) : 
             base(screenService, renderService, spriteService) { }
@@ -102,6 +104,13 @@ namespace pacman_port.Game.Systems.Map
                         _column = (int) playerPosition.X / 24;
                         break;
                 }
+
+                
+                if (_column < 0 || _column > Columns-1)
+                {
+                    PlayerIsOnMapLimit?.Invoke();
+                    return true;
+                }
                 
                 return _mapData.Data[_row, _column].T != 1;
             }
@@ -141,9 +150,19 @@ namespace pacman_port.Game.Systems.Map
         {
             var x = (int) currentTile.X;
             var y = (int) currentTile.Y;
+            var result = 0;
+
+            if (x < 0 || x > Columns - 1) return -1;
             
-            var result = _mapData.Data[y, x].T;
-            
+            try
+            {
+                result = _mapData.Data[y, x].T;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("MSS");
+            }
+
             _mapData.Data[y, x].T = -1;
             _tileViews[y, x].SetData(_mapData.Data[y, x]);
             

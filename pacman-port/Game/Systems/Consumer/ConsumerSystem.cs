@@ -44,13 +44,16 @@ namespace pacman_port.Game.Systems.Consumer
         public override void Update()
         {
             if (!_isReady) return;
-            
+
             Consume();
         }
 
         private void Consume()
         {
-            _currentTile = _playerSystem.GetCurrentTile();
+            var ct = _playerSystem.GetCurrentTile();
+
+            _currentTile.X = ct[0];
+            _currentTile.Y = ct[1];
             
             if (_lastTile == _currentTile) return;
 

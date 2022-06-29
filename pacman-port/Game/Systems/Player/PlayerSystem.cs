@@ -16,7 +16,7 @@ namespace pacman_port.Game.Systems.Player
         private MapSystem _mapSystem;
         private PlayerView _view;
         private Vector2 _currentPosition;
-        private Vector2 _currentTile;
+        private int[] _currentTile = {0, 0};
 
         private Vector2 _initialPlayerPosition;
         private MovementDirection _requestedMovementDirection = MovementDirection.None;
@@ -27,6 +27,8 @@ namespace pacman_port.Game.Systems.Player
         private const int InitialTileX = 9;
         private const int InitialTileY = 19;
         private const int PlayerSpeed = 4;
+
+        public bool IsTeleporting { get; private set; }
         
 
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
@@ -37,7 +39,8 @@ namespace pacman_port.Game.Systems.Player
         public void Init(MapSystem mapSystem)
         {
             _mapSystem = mapSystem;
-
+            _mapSystem.PlayerIsOnMapLimit += PlayerIsOnMapLimit;
+            
             SetupPlayerView();
             Reset();
         }
@@ -54,6 +57,7 @@ namespace pacman_port.Game.Systems.Player
             TileHeight = (int) _view.Bounds.height;
             
             _initialPlayerPosition = new Vector2(TileWidth * InitialTileX, TileHeight * InitialTileY);
+
         }
 
         public override void Reset()
@@ -71,6 +75,8 @@ namespace pacman_port.Game.Systems.Player
             ProcessRequestedDirection();
 
             _view.UpdateView(_currentPosition, _currentMovementDirection);
+            
+            UpdateCurrentTile();
         }
 
         private void ProcessRequestedDirection()
@@ -120,14 +126,26 @@ namespace pacman_port.Game.Systems.Player
             }
         }
 
+        private void PlayerIsOnMapLimit()
+        {
+            if (_currentPosition.X < -TileWidth && _currentMovementDirection == MovementDirection.Left)
+            {
+                _currentPosition.X = TileWidth*_mapSystem.Columns;
+            } 
+            if (_currentPosition.X > TileWidth*_mapSystem.Columns && _currentMovementDirection == MovementDirection.Right)
+            {
+                _currentPosition.X = -TileWidth;
+            }
+        }
+        
         private void CheckIfDirectionCanBeChanged()
         {
             if (_currentMovementDirection == _requestedMovementDirection) return;
 
-            _currentTile.X = _currentPosition.X % TileWidth;
-            _currentTile.Y = _currentPosition.Y % TileHeight;
+            _currentTile[0] = (int)_currentPosition.X % TileWidth;
+            _currentTile[1] = (int)_currentPosition.Y % TileHeight;
             
-            if (_currentTile.X != 0 || _currentTile.Y != 0) return;
+            if (_currentTile[0] != 0 || _currentTile[1] != 0) return;
             
             if (_mapSystem.CanMove(_currentPosition, _requestedMovementDirection))
             {
@@ -139,12 +157,20 @@ namespace pacman_port.Game.Systems.Player
             }
         }
 
-        public Vector2 GetCurrentTile()
+        public int[] GetCurrentTile()
         {
-            _currentTile.X = (int)MathF.Ceiling(_currentPosition.X / TileWidth);
-            _currentTile.Y = (int)MathF.Ceiling(_currentPosition.Y / TileHeight);
-
             return _currentTile;
+        }
+
+        private void UpdateCurrentTile()
+        {
+            _currentTile[0] = (int)MathF.Ceiling(_currentPosition.X / TileWidth);
+            _currentTile[1] = (int)MathF.Ceiling(_currentPosition.Y / TileHeight);
+        }
+        
+        ~PlayerSystem()
+        {
+            _mapSystem.PlayerIsOnMapLimit -= PlayerIsOnMapLimit;
         }
     }
 }
