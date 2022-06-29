@@ -1,6 +1,7 @@
 ﻿using System;
 using common.Core.Managers.Game;
 using common.Core.States.Base;
+using pacman_port.Game.States.InitGame;
 using pacman_port.Game.Systems.Consumer;
 using pacman_port.Game.Systems.Fruit;
 using pacman_port.Game.Systems.Map;
@@ -49,7 +50,14 @@ namespace pacman_port.Game.States.Game
             _playerSystem.Update();
             
             _consumerSystem.Update();
-            
+
+            if (_isBigBallConsumed && _isMiniBallConsumed)
+            {
+                _isBigBallConsumed = false;
+                _isMiniBallConsumed = false;
+                GameManager.SetState(GameManager.StateFactory.Get(typeof(InitGameState)));
+                
+            }
             /*
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_A))
             {
@@ -59,21 +67,29 @@ namespace pacman_port.Game.States.Game
             _fruitSystem.Update();
             */
         }
+
+        private bool _isMiniBallConsumed = false;
+        private bool _isBigBallConsumed = false;
         
         private void OnMiniBallConsumed(bool isLast)
         {
+            _isMiniBallConsumed = isLast;
+            /*
             if (isLast)
             {
                 Console.WriteLine("ALL MINI CONSUMED");
             }
+            */
         }
 
         private void OnBigBallConsumed(bool isLast)
         {
+            /*
             if (isLast)
             {
                 Console.WriteLine("ALL BIG CONSUMED");
-            }
+            }*/
+            _isBigBallConsumed = isLast;
         }
     }
 }

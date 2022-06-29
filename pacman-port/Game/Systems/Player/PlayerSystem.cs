@@ -28,9 +28,6 @@ namespace pacman_port.Game.Systems.Player
         private const int InitialTileY = 19;
         private const int PlayerSpeed = 4;
 
-        public bool IsTeleporting { get; private set; }
-        
-
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
             base(screenService, renderService, spriteService)
         {

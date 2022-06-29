@@ -32,9 +32,9 @@ namespace pacman_port.Game.Systems.Map
         
         public override void Init()
         {
+            Reset();
             LoadMapData();
             SetupMapView();
-            Reset();
         }
 
         private void SetupMapView()
@@ -61,7 +61,11 @@ namespace pacman_port.Game.Systems.Map
             Console.WriteLine("M: "+k); // ESO DA
         }
 
-        public override void Reset() { }
+        public override void Reset()
+        {
+            MaxBigBalls = 0;
+            MaxMiniBalls = 0;
+        }
 
         public override void Update()
         {
