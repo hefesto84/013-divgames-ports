@@ -40,16 +40,7 @@ namespace pacman_port.Game.Views.Tile
             Bounds = _destination;
 
         }
-
-        /*
-        public void UpdateData(MapDataEntry mapDataEntry)
-        {
-            
-            _mapDataEntry = mapDataEntry;
-            _textureData = _spriteService.Get(_mapDataEntry.T);
-            _mapSystem.OnUpdate -= OnUpdate;
-        }
-        */
+        
         public void Update()
         {
             if (!isRenderable) return;

@@ -228,6 +228,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Systems/UI/UISystem.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Fruit/FruitView.cs">
           <value>
             <set />
@@ -249,6 +254,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/pacman-port/Game/Views/Tile/TileView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/UI/FruitsView.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pacman-port/Game/Views/UI/LivesView.cs">
           <value>
             <set />
           </value>

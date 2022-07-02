@@ -2,12 +2,13 @@
 using common.Core.Managers.Game;
 using common.Core.States.Base;
 using pacman_port.Game.States.Game;
+using pacman_port.Game.Systems.UI;
 
 namespace pacman_port.Game.States.LoadingGame
 {
     public class LoadingGameState : State
     {
-        public LoadingGameState(GameManager gameManager, Type type) : base(gameManager, type)
+        public LoadingGameState(GameManager gameManager, UISystem uiSystem) : base(gameManager, typeof(LoadingGameState))
         {
         }
 

@@ -81,8 +81,6 @@ namespace pacman_port.Game.Systems.Consumer
             }
             
             _gameService.UpdateScore(result);
-            
-            //Console.WriteLine($"Big balls: {_currentBigBalls}/{_maxBigBalls}, Mini balls: {_currentMiniBalls}/{_maxMiniBalls}");
         }
     }
 }

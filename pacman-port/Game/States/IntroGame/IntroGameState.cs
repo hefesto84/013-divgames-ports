@@ -2,12 +2,13 @@
 using common.Core.Managers.Game;
 using common.Core.States.Base;
 using pacman_port.Game.States.PressStart;
+using pacman_port.Game.Systems.UI;
 
 namespace pacman_port.Game.States.IntroGame
 {
     public class IntroGameState : State
     {
-        public IntroGameState(GameManager gameManager, Type type) : base(gameManager, type)
+        public IntroGameState(GameManager gameManager, UISystem uiSystem) : base(gameManager, typeof(IntroGameState))
         {
         }
 

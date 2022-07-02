@@ -26,8 +26,10 @@ namespace pacman_port.Game.Systems.Player
         
         private const int InitialTileX = 9;
         private const int InitialTileY = 19;
-        private const int PlayerSpeed = 4;
+        private int PlayerSpeed = 4;
 
+        private int _currentFps;
+        
         public PlayerSystem(ScreenService screenService, RenderService renderService, SpriteService spriteService) :
             base(screenService, renderService, spriteService)
         {
@@ -63,6 +65,8 @@ namespace pacman_port.Game.Systems.Player
             
             _currentMovementDirection = MovementDirection.None;
             _requestedMovementDirection = MovementDirection.None;
+            
+            
         }
 
         public override void Update()
@@ -75,7 +79,7 @@ namespace pacman_port.Game.Systems.Player
             
             UpdateCurrentTile();
         }
-
+        
         private void ProcessRequestedDirection()
         {
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))

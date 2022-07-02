@@ -11,6 +11,7 @@ using pacman_port.Game.Systems.Consumer;
 using pacman_port.Game.Systems.Fruit;
 using pacman_port.Game.Systems.Map;
 using pacman_port.Game.Systems.Player;
+using pacman_port.Game.Systems.UI;
 
 namespace pacman_port.Game
 {
@@ -23,6 +24,7 @@ namespace pacman_port.Game
         private PlayerSystem _playerSystem;
         private MapSystem _mapSystem;
         private ConsumerSystem _consumerSystem;
+        private UISystem _uiSystem;
         
         public Bootstrap(PacmanConfig config) : base(config) { }
 
@@ -40,15 +42,16 @@ namespace pacman_port.Game
             _mapSystem = new MapSystem(ScreenService, RenderService, _spriteService);
             _playerSystem = new PlayerSystem(ScreenService, RenderService, _spriteService);
             _consumerSystem = new ConsumerSystem(_gameService, _playerSystem, _mapSystem);
+            _uiSystem = new UISystem(ScreenService, RenderService, _spriteService, _gameService);
         }
 
         protected override void RegisterCustomStates()
         {
-            StateFactory.RegisterState(new InitGameState(GameManager, typeof(InitGameState)));
-            StateFactory.RegisterState(new IntroGameState(GameManager, typeof(IntroGameState)));
-            StateFactory.RegisterState(new PressStartState(GameManager, typeof(PressStartState)));
-            StateFactory.RegisterState(new LoadingGameState(GameManager, typeof(LoadingGameState)));
-            StateFactory.RegisterState(new GameState(GameManager, _gameService, _fruitSystem, _mapSystem, _playerSystem, _consumerSystem));
+            StateFactory.RegisterState(new InitGameState(GameManager, _uiSystem));
+            StateFactory.RegisterState(new IntroGameState(GameManager, _uiSystem));
+            StateFactory.RegisterState(new PressStartState(GameManager, _uiSystem));
+            StateFactory.RegisterState(new LoadingGameState(GameManager, _uiSystem));
+            StateFactory.RegisterState(new GameState(GameManager, _gameService, _uiSystem, _fruitSystem, _mapSystem, _playerSystem, _consumerSystem));
         }
     }
 }
